@@ -79,8 +79,8 @@ export default function App() {
           className="max-w-3xl"
         >
           <motion.div variants={itemVariants} className="text-[50px] md:text-[80px] leading-[0.9] font-light tracking-tight mb-8">
-            Membangun <br/>
-            <span className="italic font-serif text-[#888]">dengan Ketelitian.</span>
+            Segera Hadir <br/>
+            <span className="italic font-serif text-[#888]">Fitur Baru.</span>
           </motion.div>
           
           <motion.p variants={itemVariants} className="text-base md:text-lg text-[#888] font-light max-w-md mb-12 leading-relaxed">
