@@ -79,8 +79,8 @@ export default function App() {
           className="max-w-3xl"
         >
           <motion.div variants={itemVariants} className="text-[50px] md:text-[80px] leading-[0.9] font-light tracking-tight mb-8">
-            Segera Hadir <br/>
-            <span className="italic font-serif text-[#888]">Fitur Baru.</span>
+            RuangRiung <br/>
+            <span className="italic font-serif text-[#888]">sedang dalam perbaikan.</span>
           </motion.div>
           
           <motion.p variants={itemVariants} className="text-base md:text-lg text-[#888] font-light max-w-md mb-12 leading-relaxed">
@@ -142,7 +142,7 @@ export default function App() {
                       duration: 1.5, 
                       ease: "easeInOut" 
                     }}
-                    className="absolute top-0 bottom-0 w-full bg-gradient-to-r from-transparent via-[#444] to-transparent" 
+                    className="absolute top-0 bottom-0 w-full bg-gradient-to-r from-transparent via-green-600 to-transparent" 
                   />
                 </div>
                 <span className="text-[11px] font-mono text-[#888] animate-pulse">PROCESSING</span>
