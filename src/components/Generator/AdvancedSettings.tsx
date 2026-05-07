@@ -25,7 +25,7 @@ export interface GeneratorSettings {
 interface AdvancedSettingsProps {
   settings: GeneratorSettings;
   setSettings: React.Dispatch<React.SetStateAction<GeneratorSettings>>;
-  models: string[];
+  models: {name: string; isPro: boolean}[];
   aspectRatio: 'Kotak' | 'Portrait' | 'Lansekap' | 'Custom';
   onAspectRatioChange: (preset: 'Kotak' | 'Portrait' | 'Lansekap') => void;
   onManualDimensionChange: (width: number, height: number) => void;
@@ -94,7 +94,11 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
             onChange={(e) => handleSettingChange('model', e.target.value)}
             className={selectStyle}
           >
-            {models.map(m => <option key={m} value={m} className="bg-[#1a1a1a]">{m.toUpperCase()}</option>)}
+            {models.map(m => (
+              <option key={m.name} value={m.name} className="bg-[#1a1a1a]">
+                {m.name.toUpperCase()} {m.isPro ? '✨ (PRO)' : ''}
+              </option>
+            ))}
           </select>
         </div>
       </div>

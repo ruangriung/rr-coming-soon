@@ -9,7 +9,7 @@ interface ControlPanelProps {
   setSettings: React.Dispatch<React.SetStateAction<GeneratorSettings>>;
   onGenerate: () => void;
   isLoading: boolean;
-  models: string[];
+  models: {name: string; isPro: boolean}[];
 }
 
 const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, models }: ControlPanelProps) => {

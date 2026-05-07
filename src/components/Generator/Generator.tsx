@@ -48,7 +48,7 @@ export default function Generator() {
   const [settings, setSettings] = useState<GeneratorSettings>(INITIAL_SETTINGS);
   const [isLoading, setIsLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [modelList, setModelList] = useState<string[]>([]);
+  const [modelList, setModelList] = useState<{name: string; isPro: boolean}[]>([]);
 
   useEffect(() => {
     const fetchModels = async () => {
@@ -67,16 +67,22 @@ export default function Generator() {
                 const name = (typeof m === 'string' ? m : (m.name || m.model || '')).toLowerCase();
                 return !name.includes('video') && !name.includes('mp4');
               })
-              .map(m => typeof m === 'string' ? m : (m.name || m.model || ''))
-              .filter(name => name.length > 0);
+              .map(m => {
+                const name = typeof m === 'string' ? m : (m.name || m.model || '');
+                // Detect PRO status from API metadata or name suffix
+                const isPro = m.paid_only === true || name.toLowerCase().includes('-pro');
+                return { name, isPro };
+              })
+              .filter(m => m.name.length > 0);
 
             if (apiModels.length > 0) {
               setModelList(apiModels);
               // Set initial model if current one isn't in the list
-              if (!apiModels.includes(settings.model)) {
+              const modelNames = apiModels.map(m => m.name);
+              if (!modelNames.includes(settings.model)) {
                 setSettings(prev => ({ 
                   ...prev, 
-                  model: apiModels.includes('flux') ? 'flux' : apiModels[0] 
+                  model: modelNames.includes('flux') ? 'flux' : modelNames[0] 
                 }));
               }
             }
