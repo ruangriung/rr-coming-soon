@@ -37,6 +37,11 @@ export async function onRequest(context: any) {
       'image', 'duration', 'aspectRatio', 'audio', 't'
     ];
 
+    // Map frontend camelCase to API snake_case
+    if (params.negativePrompt && !params.negative_prompt) {
+      params.negative_prompt = params.negativePrompt;
+    }
+
     Object.keys(params).forEach(key => {
       if (supportedParams.includes(key) && params[key] !== 'undefined' && params[key] !== null) {
         if (key === 'model') {
@@ -52,8 +57,7 @@ export async function onRequest(context: any) {
     }
 
     const baseUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}`;
-    const apiUrl = `${baseUrl}?${pollParams.toString()}`;
-
+    
     const headers: Record<string, string> = {
       'Accept': 'image/*, application/json',
       'Referer': 'https://ruangriung.my.id',
@@ -64,10 +68,27 @@ export async function onRequest(context: any) {
       headers['Authorization'] = `Bearer ${activeApiKey}`;
     }
 
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers,
-    });
+    let response;
+    if (method === 'POST') {
+      // Use POST for large payloads (like base64 images)
+      headers['Content-Type'] = 'application/json';
+      response = await fetch(baseUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          ...params,
+          prompt,
+          key: activeApiKey
+        })
+      });
+    } else {
+      // Use GET for standard requests
+      const apiUrl = `${baseUrl}?${pollParams.toString()}`;
+      response = await fetch(apiUrl, {
+        method: 'GET',
+        headers,
+      });
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
