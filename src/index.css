@@ -6,3 +6,26 @@
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/5 border border-white/10 rounded-[2.5rem];
+  }
+  
+  .glass-button {
+    @apply bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center;
+  }
+
+  .glass-inset {
+    @apply bg-black/20 border border-white/5 rounded-2xl;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
