@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Sun, Moon, Laptop } from 'lucide-react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
+  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -10,6 +10,8 @@ export default function ThemeToggle() {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'system' | null;
     if (savedTheme) {
       setTheme(savedTheme);
+    } else {
+      setTheme('dark');
     }
   }, []);
 

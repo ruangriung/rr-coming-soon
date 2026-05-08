@@ -23,10 +23,7 @@ export default function App() {
       <Toaster 
         position="top-center"
         toastOptions={{
-          className: 'glass-card text-white text-xs font-bold border-white/10',
-          style: {
-            background: 'rgba(26, 26, 26, 1)',
-          },
+          className: '!bg-[#1a1a1a] !text-white text-xs font-bold !border !border-white/10 shadow-xl !rounded-2xl',
         }}
       />
       <Routes>
