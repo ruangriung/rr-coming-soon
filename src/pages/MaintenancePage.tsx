@@ -59,7 +59,7 @@ export default function MaintenancePage() {
           transition={{ duration: 0.8 }}
           className="flex items-center gap-4"
         >
-          <Link to="/generator" className="group flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full hover:bg-orange-500 hover:text-white transition-all">
+          <Link to="/generator" className="group flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full hover:bg-orange-500 hover:text-white transition-all cursor-pointer">
              <Sparkles size={14} className="text-orange-500 group-hover:text-white" />
              <span className="text-[10px] uppercase tracking-widest font-black">AI Studio</span>
           </Link>
@@ -91,7 +91,7 @@ export default function MaintenancePage() {
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6">
             <a 
               href="mailto:admin@ruangriung.my.id" 
-              className="group flex flex-col border border-[#333] hover:border-[#666] p-6 rounded-sm transition-all duration-500 bg-[#0d0d0d]/50 hover:bg-[#111]"
+              className="group flex flex-col border border-[#333] hover:border-[#666] p-6 rounded-sm transition-all duration-500 bg-[#0d0d0d]/50 hover:bg-[#111] cursor-pointer"
               id="contact-email"
             >
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#666] mb-3 font-semibold group-hover:text-[#888] transition-colors">Direct Inquiries</span>
@@ -105,7 +105,7 @@ export default function MaintenancePage() {
               href="https://web.facebook.com/groups/1182261482811767/" 
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col border border-[#333] hover:border-[#4267B2] p-6 rounded-sm transition-all duration-500 bg-[#0d0d0d]/50 hover:bg-[#4267B2]/5"
+              className="group flex flex-col border border-[#333] hover:border-[#4267B2] p-6 rounded-sm transition-all duration-500 bg-[#0d0d0d]/50 hover:bg-[#4267B2]/5 cursor-pointer"
               id="facebook-group"
             >
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#666] mb-3 font-semibold group-hover:text-[#4267B2] transition-colors">Join Community</span>
@@ -162,13 +162,15 @@ export default function MaintenancePage() {
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-[#151515] flex flex-col sm:flex-row justify-between items-center gap-4 text-[9px] uppercase tracking-[0.3em] text-[#333] font-medium">
-            <div className="flex items-center gap-4">
-              <span>Status: Active Development</span>
-              <div className="w-1 h-1 rounded-full bg-[#151515]" />
-              <span>Optimizing Resource for Quality</span>
+          <div className="mt-8 pt-8 border-t border-[#151515] flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div className="flex flex-wrap justify-center sm:justify-start items-center gap-6 text-[9px] uppercase tracking-[0.3em] text-[#333] font-medium">
+              <Link to="/kebijakan-privasi" className="hover:text-orange-500 transition-colors cursor-pointer">Privacy</Link>
+              <Link to="/ketentuan-layanan" className="hover:text-orange-500 transition-colors cursor-pointer">Terms</Link>
+              <Link to="/penghapusan-data" className="hover:text-orange-500 transition-colors cursor-pointer">Data</Link>
+              <Link to="/tentang-kami" className="hover:text-orange-500 transition-colors cursor-pointer">About</Link>
+              <Link to="/kontak" className="hover:text-orange-500 transition-colors cursor-pointer">Contact</Link>
             </div>
-            <span>&copy; {year} Ruang Riung Creative Community</span>
+            <span className="text-[9px] uppercase tracking-[0.3em] text-[#333] font-medium text-center sm:text-right">&copy; {year} Ruang Riung Creative Community</span>
           </div>
         </div>
       </footer>

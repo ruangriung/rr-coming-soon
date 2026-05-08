@@ -1,5 +1,22 @@
 // functions/api/pollinations/models/image.ts
 
+const IMAGE_MODEL_MAPPING: Record<string, string> = {
+  'flux': 'Flux.1 Schnell',
+  'flux-pro': 'Flux.1 Pro',
+  'flux-realism': 'Flux Realism',
+  'flux-anime': 'Flux Anime',
+  'flux-3d': 'Flux 3D Render',
+  'flux-civitai': 'Flux CivitAI',
+  'any-dark': 'Any Dark V3',
+  'turbo': 'SDXL Turbo',
+  'stable-diffusion-xl': 'Stable Diffusion XL',
+  'dalle-3': 'DALL-E 3',
+  'midjourney': 'Midjourney Style',
+  'ideogram': 'Ideogram v2',
+  'aura-flow': 'Aura Flow',
+  'recraft-v3': 'Recraft v3'
+};
+
 export async function onRequestGet(context: any) {
   const { request } = context;
   
@@ -19,30 +36,46 @@ export async function onRequestGet(context: any) {
       headers['Authorization'] = `Bearer ${activeKey}`;
     }
 
-    const apiUrl = 'https://gen.pollinations.ai/image/models';
-    console.log(`[Backend] Fetching models from ${apiUrl}...`);
-    
+    const apiUrl = 'https://gen.pollinations.ai/v1/models';
     const response = await fetch(apiUrl, { headers });
 
-    if (!response.ok) {
-      console.error(`[Backend] API failed with status: ${response.status}`);
-      throw new Error(`API Error: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`API Error: ${response.status}`);
 
     const data = await response.json();
-    console.log(`[Backend] Successfully fetched ${Array.isArray(data) ? data.length : 'object'} models`);
+    let allModels = [];
     
-    return new Response(JSON.stringify(data), {
+    if (data && Array.isArray(data.data)) {
+      allModels = data.data;
+    } else if (Array.isArray(data)) {
+      allModels = data;
+    }
+
+    const imageModels = allModels
+      .filter((m: any) => {
+        const modalities = m.output_modalities || [];
+        return modalities.includes('image') && !modalities.includes('video') && !modalities.includes('audio');
+      })
+      .map((m: any) => ({
+        id: m.id,
+        name: IMAGE_MODEL_MAPPING[m.id] || m.id.replace(/-/g, ' ').replace(/\b\w/g, (l: any) => l.toUpperCase()),
+        isPro: m.paid_only === true || m.id.toLowerCase().includes('-pro')
+      }));
+
+    if (imageModels.length === 0) {
+      return new Response(JSON.stringify([
+        { id: 'flux', name: 'Flux.1 Schnell', isPro: false },
+        { id: 'flux-pro', name: 'Flux.1 Pro', isPro: true }
+      ]), { headers: { 'Content-Type': 'application/json' } });
+    }
+
+    return new Response(JSON.stringify(imageModels), {
       headers: { 
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache' 
       }
     });
   } catch (error: any) {
-    console.error('[Backend] Error:', error.message);
-    // If API is down, return a minimal set that we know works
-    const minimalFallback = ['flux', 'flux-realism', 'flux-anime', 'turbo'];
-    return new Response(JSON.stringify(minimalFallback), {
+    return new Response(JSON.stringify([{ id: 'flux', name: 'Flux.1', isPro: false }]), {
       headers: { 'Content-Type': 'application/json' }
     });
   }

@@ -1,0 +1,665 @@
+[
+  {
+    "slug": "selamat-datang-di-ruangriung-ai-studio-terbaru",
+    "title": "Selamat Datang di RuangRiung AI Studio Terbaru",
+    "date": "2026-05-08T00:00:00Z",
+    "author": "RuangRiung AI",
+    "summary": "Peluncuran resmi antarmuka AI Studio yang lebih cepat, lebih cerdas, dan mendukung multi-tools untuk gambar, video, dan audio.",
+    "image": "https://raw.githubusercontent.com/ruangriung/ruangriung-generator-app/refs/heads/main/public/assets/ruangriung.png",
+    "category": "Berita",
+    "tags": [
+      "peluncuran",
+      "studio",
+      "fitur-baru"
+    ]
+  },
+  {
+    "slug": "panduan-ai-audio-untuk-kreator-bikin-voiceover-realistis-kontrol-emosi-dan-keamanan-data-di-ruangriung",
+    "title": "Panduan AI Audio untuk Kreator: Bikin Voiceover Realistis, Kontrol Emosi, dan Keamanan Data di RuangRiung",
+    "date": "2026-05-07T21:04:16.747Z",
+    "author": "RuangRiung AI",
+    "summary": "Belajar membuat voiceover audio AI yang realistis: kontrol emosi, kloning suara dengan aman, serta workflow dari skrip hingga mastering—khusus kreator.",
+    "image": "/assets/ruangriung.png",
+    "category": "Tutorial",
+    "tags": [
+      "AI audio",
+      "voiceover",
+      "workflow kreator",
+      "privasi data",
+      "RuangRiung"
+    ]
+  },
+  {
+    "slug": "tutorial-ai-maksimalkan-workflow-kreatif-dengan-bantuan-chatbot-panduan-praktis-untuk-konten-ide-baru",
+    "title": "Tutorial AI: Maksimalkan Workflow Kreatif dengan Bantuan Chatbot (Panduan Praktis untuk Konten & Ide Baru)",
+    "date": "2026-05-07T21:00:52.759Z",
+    "author": "RuangRiung AI",
+    "summary": "Pelajari cara memakai chatbot AI untuk menulis ide, menyusun naskah, riset, dan mengedit konten dengan workflow yang rapi dan konsisten.",
+    "image": "/assets/ruangriung.png",
+    "category": "Tutorial",
+    "tags": [
+      "AI untuk kreator",
+      "chatbot",
+      "workflow kreatif",
+      "pembuatan konten",
+      "prompt engineering"
+    ]
+  },
+  {
+    "slug": "berita-ai-terbaru-2026-terobosan-model-bahasa-besar-yang-mengubah-cara-kita-bekerja-dan-berkarya",
+    "title": "Berita AI Terbaru 2026: Terobosan Model Bahasa Besar yang Mengubah Cara Kita Bekerja dan Berkarya",
+    "date": "2026-05-07T20:58:46.862Z",
+    "author": "RuangRiung AI",
+    "summary": "Tahun 2026 menghadirkan terobosan model bahasa besar: lebih akurat, lebih kontekstual, lebih aman. Apa dampaknya untuk kreator konten dan pengguna harian?",
+    "image": "/assets/ruangriung.png",
+    "category": "Berita",
+    "tags": [
+      "AI 2026",
+      "model bahasa besar",
+      "LLM",
+      "kreator konten",
+      "etika AI"
+    ]
+  },
+  {
+    "slug": "inspirasi-kreatif-menciptakan-dunia-fantasi-dengan-ai-storyteller",
+    "title": "Inspirasi Kreatif: Menciptakan Dunia Fantasi dengan AI Storyteller",
+    "date": "2026-05-04T07:46:26.496Z",
+    "author": "RuangRiung AI",
+    "summary": "Pelajari cara membuat dunia fantasi dari nol memakai AI storyteller: dari ide, worldbuilding, plot, hingga strategi konten agar siap dipublikasikan.",
+    "image": "/assets/ruangriung.png",
+    "category": "Inspirasi",
+    "tags": [
+      "AI storyteller",
+      "worldbuilding",
+      "kreator konten",
+      "teknologi kreatif",
+      "ide cerita"
+    ]
+  },
+  {
+    "slug": "chip-ai-terbaru-apa-yang-berubah-di-gadget-kita-dan-dampaknya-untuk-pengguna-indonesia",
+    "title": "Chip AI Terbaru: Apa yang Berubah di Gadget Kita dan Dampaknya untuk Pengguna Indonesia",
+    "date": "2026-05-01T07:24:29.266Z",
+    "author": "RuangRiung AI",
+    "summary": "Perkembangan chip AI terbaru mendorong gadget lebih cepat, hemat daya, dan makin “pintar”. Simak dampak nyata untuk HP, laptop, kamera, hingga kreator konten.",
+    "image": "/assets/ruangriung.png",
+    "category": "Berita",
+    "tags": [
+      "chip AI",
+      "NPU",
+      "AI di perangkat",
+      "smartphone",
+      "kreator konten"
+    ]
+  },
+  {
+    "slug": "inspirasi-kreatif-cara-ai-membantu-seniman-menemukan-gaya-unik-mereka-panduan-praktis-untuk-kreator",
+    "title": "Inspirasi Kreatif: Cara AI Membantu Seniman Menemukan Gaya Unik Mereka (Panduan Praktis untuk Kreator)",
+    "date": "2026-04-26T22:32:21.735Z",
+    "author": "RuangRiung AI",
+    "summary": "AI bisa jadi “cermin kreatif” yang membantu seniman menemukan gaya unik: eksplorasi ide, moodboard otomatis, variasi cepat, hingga evaluasi konsistensi karya.",
+    "image": "/assets/ruangriung.png",
+    "category": "Inspirasi",
+    "tags": [
+      "AI untuk seniman",
+      "kreativitas",
+      "content creator",
+      "moodboard",
+      "gaya visual unik"
+    ]
+  },
+  {
+    "slug": "cuan-rencana-workflow-codex-github-vercel-adsense",
+    "title": "Cuan Mengalir Terus Tanpa Batasan Algoritma",
+    "date": "2025-09-26",
+    "author": "Tim RuangRiung",
+    "category": "Monetisasi",
+    "tags": [
+      "Codex",
+      "ChatGPT",
+      "GitHub",
+      "Vercel",
+      "AdSense",
+      "monetisasi",
+      "storytelling"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Narasi santai ilmiah yang menuntun pemula merangkai integrasi Codex-ChatGPT dengan GitHub, Vercel, dan Google AdSense agar cuan mengalir terus tanpa batasan algoritma."
+  },
+  {
+    "slug": "menghubungkan-codex-dari-chatgpt-github-vercel-dan-adsense",
+    "title": "Strategi Formal Menghubungkan Codex ChatGPT, GitHub, Vercel, dan Google AdSense untuk Cuan Berkelanjutan",
+    "date": "2025-09-26",
+    "author": "Tim RuangRiung",
+    "category": "Monetisasi",
+    "tags": [
+      "Codex",
+      "ChatGPT",
+      "GitHub",
+      "Vercel",
+      "AdSense",
+      "monetisasi",
+      "website"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Narasi formal namun tetap menggugah tentang cara membangun alur kerja Codex, GitHub, Vercel, dan Google AdSense agar website pribadi memperoleh pendapatan stabil di luar Facebook."
+  },
+  {
+    "slug": "proposal-pelaksanaan-ai-art-battle",
+    "title": "Proposal Pelaksanaan Kompetisi AI Art Battle",
+    "date": "2025-09-21",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "kompetisi",
+      "seni",
+      "proposal"
+    ],
+    "summary": "Template lengkap untuk menyusun kompetisi AI Art Battle yang memadukan strategi kreator, pengalaman juri, hingga alur acara yang rapih."
+  },
+  {
+    "slug": "trik-rahasia-google-ai-studio-untuk-prompting-maksimal",
+    "title": "Terbongkar! 9 Trik Rahasia Google AI Studio Biar Prompt Kamu Auto Meledak",
+    "summary": "Kupas tuntas strategi tersembunyi di Google AI Studio agar prototipe Gemini kamu jadi makin tajam, responsif, dan siap dibawa ke level produksi.",
+    "date": "2025-09-21",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "Google AI Studio",
+      "Gemini",
+      "prompting",
+      "tutorial",
+      "prototyping"
+    ],
+    "image": "/v1/assets/ruangriung.png"
+  },
+  {
+    "slug": "panduan-menilai-kualitas-gambar-ai",
+    "title": "Panduan Menilai Kualitas Gambar AI Secara Menyeluruh",
+    "date": "2025-09-20",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "penilaian",
+      "gambar",
+      "panduan"
+    ],
+    "summary": "Menyusun kerangka penilaian yang menyatukan aspek teknis, artistik, hingga etika agar evaluasi gambar AI menjadi lebih tajam namun tetap fleksibel untuk berbagai kebutuhan."
+  },
+  {
+    "slug": "kata-kunci-unik-dan-antik-untuk-nama-kesenian",
+    "title": "40 Kata Kunci Unik & Antik untuk Nama Kesenian",
+    "date": "2025-09-18",
+    "author": "Arif Tirtana",
+    "image": "/v1/assets/kata-unik.webp",
+    "category": "Penamaan",
+    "tags": [
+      "kesenian",
+      "penamaan",
+      "kreatif",
+      "unik",
+      "antik"
+    ],
+    "summary": "Empat puluh kata kunci unik dan antik yang dirancang khusus untuk penamaan proyek kesenian, studio, atau tema kolektif untuk gambar AI. Masing-masing membawa nuansa misteri, sejarah, dan orisinalitas."
+  },
+  {
+    "slug": "prompt-haram-untuk-konten-kreator",
+    "title": "Prompt Haram Untuk Konten Kreator",
+    "date": "2025-09-18",
+    "author": "Tim RuangRiung",
+    "category": "Sosial Media",
+    "tags": [
+      "website",
+      "konten kreator",
+      "seo",
+      "monetisasi",
+      "branding"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Website memaksimalkan kredibilitas, kontrol, monetisasi, dan SEO, sementara prompt haram justru menghambat perkembangan kreator."
+  },
+  {
+    "slug": "cara-mengoptimalkan-konten-facebook-dan-website-anda",
+    "title": "Cara Mengoptimalkan Konten Facebook dan Website Anda",
+    "date": "2025-09-17",
+    "author": "Tim RuangRiung",
+    "category": "Sosial Media",
+    "tags": [
+      "Facebook",
+      "Website",
+      "Konten",
+      "Kreator"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Mengintegrasikan Facebook dan website adalah strategi efektif untuk memperluas jangkauan, meningkatkan trafik, dan memperkuat merek Anda."
+  },
+  {
+    "slug": "ai-potensi-besar-yang-terabaikan-di-indonesia",
+    "title": "AI - Potensi Besar yang Masih Terabaikan di Indonesia",
+    "date": "2025-08-27",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "literasi digital",
+      "Indonesia",
+      "generasi muda"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Artificial Intelligence punya potensi luar biasa untuk mengubah kehidupan. Namun, di Indonesia, kesadaran akan kekuatan AI masih minim. Bagaimana membangun literasi agar generasi muda tidak tertinggal?"
+  },
+  {
+    "slug": "disable-crawler-bot-AI",
+    "title": "Cara Menonaktifkan Crawler Bot di Vercel, Cloudflare, dan GitHub",
+    "date": "2025-08-21",
+    "author": "Tim RuangRiung",
+    "category": "Web Security",
+    "tags": [
+      "crawler",
+      "bot",
+      "vercel",
+      "cloudflare",
+      "github",
+      "robots.txt"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Pelajari cara memblokir atau menonaktifkan bot crawler di Vercel, Cloudflare, dan GitHub. Gunakan robots.txt, header X-Robots-Tag, middleware, hingga firewall rules untuk melindungi situs Anda dari indexing maupun scraping."
+  },
+  {
+    "slug": "mengupas-algoritma-facebook-pro",
+    "title": "Mengupas Algoritma Facebook Pro - Cara Kerja dan Tips untuk Kreator",
+    "date": "2025-08-19",
+    "author": "Tim RuangRiung",
+    "category": "Media Sosial",
+    "tags": [
+      "facebook pro",
+      "algoritma",
+      "media sosial",
+      "tips kreator"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Memahami cara kerja algoritma Facebook adalah kunci sukses bagi kreator konten FB Pro. Pelajari tahapan, sinyal, dan tips praktis untuk meningkatkan jangkauan dan interaksi konten Anda secara organik."
+  },
+  {
+    "slug": "kenapa-orang-indonesia-suka-konten-receh",
+    "title": "Kenapa Indonesia Suka Banget dengan Konten Receh di Media Sosial?",
+    "date": "2025-08-17",
+    "author": "Tim RuangRiung",
+    "category": "Sosial Media",
+    "tags": [
+      "konten receh",
+      "tren digital",
+      "budaya",
+      "media sosial"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Konten receh jadi raja di timeline Indonesia. Apa penyebabnya? Dari algoritma sampai budaya guyonan, inilah alasan kenapa konten receh begitu mendominasi."
+  },
+  {
+    "slug": "karakter-gambar-konsisten-dengan-json",
+    "title": "Cara Membuat Karakter Gambar Konsisten dengan JSON",
+    "date": "2025-08-15",
+    "author": "Team RuangRiung",
+    "summary": "Pelajari cara menggunakan format JSON untuk mendefinisikan dan menghasilkan karakter gambar yang konsisten di berbagai proyek, termasuk integrasi dengan alat pembuatan gambar AI.",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "Tutorial",
+    "tags": [
+      "JSON",
+      "Karakter",
+      "Gambar AI",
+      "Karakter Konsisten",
+      "Generasi Gambar",
+      "Tutorial"
+    ]
+  },
+  {
+    "slug": "pola-kemenangan-ilegal",
+    "title": "Pola Kemenangan Ilegal: 5 Langkah Mengubah Kesalahan Menjadi 'Kebenaran' Sah",
+    "summary": "Analisis mendalam tentang pola lima langkah yang sering digunakan untuk membenarkan kesalahan melalui jalur hukum dan politik, mengubah narasi, dan memanipulasi sistem.",
+    "date": "2025-08-13",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "Hukum",
+    "tags": [
+      "hukum",
+      "politik",
+      "analisis",
+      "pola",
+      "etika"
+    ]
+  },
+  {
+    "slug": "panduan-menulis-prompt-json",
+    "title": "Panduan Lengkap: Menulis Prompt JSON untuk Hasil AI Maksimal",
+    "date": "2025-08-07",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "panduan",
+      "prompting",
+      "teknis",
+      "json",
+      "advanced"
+    ],
+    "summary": "Maksimalkan potensi AI dengan belajar cara menyusun prompt yang terstruktur dan kompleks menggunakan format JSON. Panduan ini cocok untuk pemula hingga mahir, lengkap dengan contoh dan tips menghindari kesalahan."
+  },
+  {
+    "slug": "menggunakan-negative-prompt",
+    "title": "Menggunakan Negative Prompt untuk Kontrol Lebih Baik dalam Generasi AI",
+    "summary": "Pelajari cara memanfaatkan negative prompt untuk menyempurnakan hasil dari model AI generatif, menghilangkan elemen yang tidak diinginkan, dan mencapai output yang lebih presisi. Panduan ini mencakup konsep, contoh, dan praktik terbaik.",
+    "date": "2025-08-06",
+    "author": "Tim Ruangriung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "generasi-ai",
+    "tags": [
+      "prompting",
+      "generasi-ai",
+      "tips",
+      "kontrol",
+      "gambar-ai"
+    ]
+  },
+  {
+    "slug": "mengupas-tuntas-fitur-ruangriung-generator",
+    "title": "Mengupas Tuntas Ragam Fitur Canggih di RuangRiung Generator",
+    "summary": "Selami lebih dalam setiap tools yang ditawarkan oleh RuangRiung Generator, mulai dari pembuatan gambar, asistensi prompt, hingga narasi audio AI untuk memaksimalkan potensi kreatif Anda.",
+    "date": "2025-08-06",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "generator",
+      "tools",
+      "kreativitas",
+      "gambar"
+    ],
+    "image": "/v1/assets/ruangriung.png"
+  },
+  {
+    "slug": "membangun-dunia-fantasi-anda-dengan-ai-storyteller",
+    "title": "Membangun Dunia Fantasi Anda dengan AI Storyteller RuangRiung",
+    "date": "2025-08-04",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "storytelling",
+      "narasi",
+      "gambar",
+      "kreativitas"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Jelajahi fitur terbaru RuangRiung AI Generator yang memungkinkan Anda menciptakan cerita visual menawan lengkap dengan gambar dan narasi yang dihasilkan AI, hanya dari sebuah ide."
+  },
+  {
+    "slug": "menjadikan-prompt-ai-tepat-sasaran",
+    "title": "Menjadikan Prompt AI Tepat Sasaran agar Gambar Sesuai Ekspektasi",
+    "date": "2025-08-02",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "prompt",
+      "gambar",
+      "spesifikasi",
+      "deskripsi"
+    ],
+    "summary": "Panduan komprehensif untuk membuat prompt AI yang spesifik, deskriptif, dan terstruktur dengan baik agar hasil gambar AI sesuai dengan ekspektasi Anda."
+  },
+  {
+    "slug": "kolaborasi-kreatif-chatbot-dan-gambar",
+    "title": "Kolaborasi Kreatif - Brainstorming Ide Gambar dengan Chatbot",
+    "date": "2025-08-01",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "gambar",
+      "chatbot",
+      "kolaborasi",
+      "kreativitas"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Jangan hanya gunakan AI untuk mengeksekusi. Pelajari cara berdialog dengan Chatbot kami untuk menggali konsep, membangun narasi, dan menciptakan prompt gambar yang kaya cerita."
+  },
+  {
+    "slug": "menjelajahi-gaya-seni-di-ruangriung",
+    "title": "Menjelajahi Berbagai Gaya Seni di RuangRiung - Dari Fotorealistik hingga Anime",
+    "date": "2025-08-01",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "tags": [
+      "AI",
+      "seni",
+      "gaya seni",
+      "fotorealistik",
+      "anime",
+      "lukisan",
+      "fantasi"
+    ],
+    "category": "AI",
+    "summary": "Selami lautan gaya seni yang bisa Anda ciptakan dengan AI. Panduan ini akan menunjukkan cara membuat gambar fotorealistik, anime, cat minyak, dan lainnya dengan prompt yang tepat."
+  },
+  {
+    "slug": "privasi-dan-keamanan-data-di-ruangriung",
+    "title": "Privasi Anda, Prioritas Kami - Bagaimana RuangRiung Menjaga Data Anda",
+    "date": "2025-08-01",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "tags": [
+      "'privasi",
+      "keamanan'",
+      "data",
+      "transparansi",
+      "localStorage"
+    ],
+    "category": "AI",
+    "summary": "Transparansi adalah kunci. Pahami data apa yang kami gunakan, mengapa kami membutuhkannya, dan bagaimana kami berkomitmen untuk menjaga keamanan dan privasi Anda di setiap langkah."
+  },
+  {
+    "slug": "studi-kasus-creator-prompt-video",
+    "title": "Studi Kasus - Dari Ide Video Viral ke Prompt Siap Pakai",
+    "date": "2025-08-01",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "video",
+      "prompt",
+      "kreativitas",
+      "konten"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Bingung memulai konten video? Lihat bagaimana fitur Creator Prompt Video mengubah ide sederhana menjadi skrip visual yang terstruktur dan siap untuk dieksekusi."
+  },
+  {
+    "slug": "alur-kerja-kreatif-menyimpan-prompt",
+    "title": "Alur Kerja Kreatif - Mengelola dan Menyimpan Prompt",
+    "date": "2025-07-29",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "alur kerja",
+      "prompt",
+      "kreatif",
+      "manajemen"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Prompt yang bagus adalah aset berharga. Pelajari cara menggunakan fitur simpan, muat, dan hapus prompt di RuangRiung untuk mempercepat proses kreatif Anda."
+  },
+  {
+    "slug": "tips-fitur-edit-gambar-real-time",
+    "title": "Tips & Trik Menggunakan Fitur Edit Gambar Real-time",
+    "date": "2025-07-28",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "edit gambar",
+      "real-time",
+      "filter",
+      "watermark"
+    ],
+    "summary": "Jangan berhenti setelah gambar berhasil dibuat. Pelajari cara menyempurnakan karya Anda secara langsung dengan fitur filter, penyesuaian, dan watermarking di RuangRiung."
+  },
+  {
+    "slug": "menghidupkan-narasi-dengan-audio-ai",
+    "title": "Dari Teks ke Suara - Menghidupkan Narasi dengan Audio AI",
+    "date": "2025-07-27",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "audio",
+      "narasi",
+      "teks ke suara",
+      "kreativitas"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Fitur Audio Generator kami lebih dari sekadar pembaca teks. Pelajari cara memilih suara yang tepat dan menyusun teks Anda untuk menghasilkan narasi audio yang hidup dan menarik."
+  },
+  {
+    "slug": "panduan-memilih-model-ai",
+    "title": "Panduan Lengkap Memilih Model AI di RuangRiung",
+    "date": "2025-07-26",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "model",
+      "generator",
+      "kreativitas",
+      "gambar"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Flux, DALL-E 3, Gemini, atau OpenAI? Setiap model punya keajaibannya sendiri. Pelajari kapan harus menggunakan masing-masing model untuk hasil yang maksimal."
+  },
+  {
+    "slug": "menguasai-komposisi-gambar-ai",
+    "title": "Menguasai Seni Komposisi Gambar dengan AI",
+    "date": "2025-07-25",
+    "author": "Tim RuangRiung",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "komposisi",
+      "gambar",
+      "sutradara",
+      "visual"
+    ],
+    "summary": "Lebih dari sekadar subjek, komposisi adalah kunci visual yang memukau. Pelajari cara mengarahkan AI untuk menggunakan shot, angle, dan pencahayaan layaknya seorang sutradara profesional."
+  },
+  {
+    "slug": "analisis-gambar-untuk-inspirasi",
+    "title": "Mengubah Gambar Menjadi Prompt. Kekuatan Analisis Gambar",
+    "date": "2025-07-23",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "author": "Tim RuangRiung",
+    "summary": "Punya gambar yang Anda sukai? Gunakan fitur Analisis Gambar kami untuk mengubahnya menjadi prompt deskriptif yang bisa Anda kembangkan lebih lanjut."
+  },
+  {
+    "slug": "memaksimalkan-asisten-prompt",
+    "title": "Cara Kreatif Menggunakan Asisten Prompt",
+    "date": "2025-07-22",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "asisten",
+      "prompt",
+      "kreativitas",
+      "brainstorming"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Asisten Prompt lebih dari sekadar penyempurna. Temukan cara-cara kreatif untuk brainstorming dan menemukan ide-ide tak terduga."
+  },
+  {
+    "slug": "mengenal-fitur-pwa",
+    "title": "Instal RuangRiung di Perangkat Anda dengan PWA",
+    "date": "2025-07-21",
+    "author": "Tim RuangRiung",
+    "category": "AI, Browser, Aplikasi",
+    "image": "/v1/assets/ruangriung.png",
+    "tags": [
+      "PWA",
+      "instalasi",
+      "aplikasi web",
+      "teknologi",
+      "aksesibilitas"
+    ],
+    "summary": "Tahukah Anda bahwa RuangRiung bisa diinstal seperti aplikasi asli? Kenali teknologi Progressive Web App (PWA) dan manfaatnya."
+  },
+  {
+    "slug": "etika-seni-ai",
+    "title": "Etika dan Hak Cipta dalam Seni AI",
+    "date": "2025-07-20",
+    "category": "AI",
+    "image": "/v1/assets/ruangriung.png",
+    "tags": [
+      "AI",
+      "seni",
+      "etika",
+      "hak cipta",
+      "komersial"
+    ],
+    "author": "Tim RuangRiung",
+    "summary": "Siapa pemilik gambar yang dibuat oleh AI? Bolehkah digunakan untuk komersial? Jelajahi pertanyaan penting seputar etika di dunia seni AI."
+  },
+  {
+    "slug": "memahami-model-ai-chatbot",
+    "title": "Memahami Model AI di Chatbot - OpenAI vs Gemini",
+    "date": "2025-07-19",
+    "author": "Tim RuangRiung",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "chatbot",
+      "OpenAI",
+      "Gemini",
+      "perbandingan"
+    ],
+    "image": "/v1/assets/ruangriung.png",
+    "summary": "Kenali perbedaan antara model AI terkemuka seperti OpenAI (GPT) dan Google (Gemini) yang tersedia di chatbot kami."
+  },
+  {
+    "slug": "tips-membuat-prompt-efektif",
+    "title": "5 Tips Membuat Prompt Gambar yang Efektif",
+    "date": "2025-07-18",
+    "author": "Tim RuangRiung",
+    "summary": "Dapatkan hasil gambar terbaik dengan mempelajari cara membuat prompt yang detail dan deskriptif. Kuasai seni berkomunikasi dengan AI.",
+    "image": "/v1/assets/ruangriung.png",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "prompt",
+      "gambar",
+      "deskriptif",
+      "kreativitas"
+    ]
+  },
+  {
+    "slug": "pengenalan-ai-generator",
+    "title": "Pengenalan Dunia AI Generator",
+    "date": "2025-07-17",
+    "author": "Tim RuangRiung",
+    "summary": "Mari kita selami apa itu AI generator, bagaimana cara kerjanya, dan mengapa teknologi ini menjadi revolusi di dunia kreatif.",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "generator",
+      "kreativitas",
+      "teknologi"
+    ],
+    "image": "/v1/assets/ruangriung.png"
+  }
+]
