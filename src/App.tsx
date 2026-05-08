@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import MaintenancePage from './pages/MaintenancePage';
 import LandingPage from './pages/LandingPage';
 import GeneratorPage from './pages/GeneratorPage';
+import QRGeneratorPage from './pages/QRGeneratorPage';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import PromptList from './pages/PromptList';
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/maintenance" element={<MaintenancePage />} />
         <Route path="/generator" element={<GeneratorPage />} />
+        <Route path="/qr-generator" element={<QRGeneratorPage />} />
         
         {/* Blog / Artikel Routes */}
         <Route path="/artikel" element={<ArticleList />} />
