@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import MaintenancePage from './pages/MaintenancePage';
+import LandingPage from './pages/LandingPage';
 import GeneratorPage from './pages/GeneratorPage';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
@@ -27,7 +28,8 @@ export default function App() {
         }}
       />
       <Routes>
-        <Route path="/" element={<MaintenancePage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/maintenance" element={<MaintenancePage />} />
         <Route path="/generator" element={<GeneratorPage />} />
         
         {/* Blog / Artikel Routes */}

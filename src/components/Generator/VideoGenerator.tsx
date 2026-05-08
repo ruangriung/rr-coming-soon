@@ -26,9 +26,19 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
 
     const fetchModels = async () => {
         try {
-            const response = await fetch('/api/pollinations/models/video');
+            const response = await fetch('https://gen.pollinations.ai/models');
             if (response.ok) {
-                const videoModels = await response.json();
+                const allModels = await response.json();
+                const videoModels = allModels
+                    .filter((m: any) => m.output_modalities && m.output_modalities.includes('video'))
+                    .map((m: any) => ({
+                        id: m.name,
+                        name: m.name.charAt(0).toUpperCase() + m.name.slice(1),
+                        isPro: m.paid_only || false,
+                        description: m.description,
+                        cost: m.pricing?.completionVideoSeconds ? `${m.pricing.completionVideoSeconds} pollen/sec` : undefined
+                    }));
+
                 if (videoModels && videoModels.length > 0) {
                     setModels(videoModels);
                     // If current model is not in the new list, pick the first one or keep veo
