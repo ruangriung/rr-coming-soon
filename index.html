@@ -1,24 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/ruangriung/ruangriung-generator-app/refs/heads/main/public/favicon.ico" />
-    <title>ruangriung dalam pengembangan</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href="https://ruangriung.my.id" />
     
+    <!-- Theme Initialization Script to prevent FOUC (White Flash) -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('theme');
+          var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'dark' || (theme === 'system' && systemPrefersDark) || (!theme && systemPrefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>RuangRiung AI Generator - Kreativitas Tanpa Batas dengan AI</title>
+    <meta name="title" content="RuangRiung AI Generator - Kreativitas Tanpa Batas dengan AI" />
+    <meta name="description" content="Ruang Riung AI Generator adalah platform kreatif bertenaga AI untuk membuat gambar artistik, naskah video, dan audio berkualitas tinggi. Solusi cerdas untuk konten kreator modern." />
+    <meta name="keywords" content="AI generator, ruangriung indonesia, image generator, video creator, audio generator, Next.js, AI art, text to image, generator ai indonesia, konten kreator, Midjourney prompt, Stable Diffusion prompt, ChatGPT Indonesia" />
+    <meta name="author" content="Ayick" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ruangriung.my.id" />
+    <meta property="og:title" content="RuangRiung AI Generator - Buat Gambar & Audio AI" />
+    <meta property="og:description" content="Platform AI all-in-one untuk konten kreator. Generate gambar artistik, naskah video, dan audio dalam hitungan detik." />
+    <meta property="og:image" content="/assets/ruangriung.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://ruangriung.my.id" />
+    <meta property="twitter:title" content="RuangRiung AI Generator" />
+    <meta property="twitter:description" content="Platform AI kreatif untuk gambar, video, dan audio." />
+    <meta property="twitter:image" content="/assets/ruangriung.png" />
+
+    <!-- Google Search Console -->
+    <meta name="google-site-verification" content="3Mybm59m8--LyAZpVYIGHrVk1fSkYemj33bq5RBBdxA" />
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7T365LMTJ7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-7T365LMTJ7');
     </script>
   </head>
-  <body>
+  <body class="bg-[#fcfcfc] dark:bg-[#0a0a0a] text-slate-900 dark:text-white transition-colors duration-500 antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
