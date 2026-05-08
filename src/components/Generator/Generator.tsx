@@ -111,8 +111,14 @@ export default function Generator() {
           </p>
           <div className="h-[1px] w-12 bg-slate-300 dark:bg-white" />
         </div>
-        <p className="text-[8px] font-bold text-slate-400 dark:text-white/40 uppercase tracking-widest">
+        <p className="text-[8px] font-bold text-slate-400 dark:text-white/40 uppercase tracking-widest mb-4">
           Pollinations AI • RuangRiung • Cloudflare Pages • 2026
+        </p>
+        <p className="text-[9px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-[0.2em]">
+          Menemukan bug atau hal yang tidak berfungsi? 
+          <a href="mailto:admin@ruangriung.my.id" className="ml-2 text-orange-500 hover:text-orange-600 transition-colors underline decoration-orange-500/30 underline-offset-4">
+            Laporkan ke Admin
+          </a>
         </p>
       </div>
     </div>
