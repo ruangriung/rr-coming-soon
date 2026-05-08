@@ -27,15 +27,15 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pb-24 pt-32 px-4">
+    <div className="min-h-screen bg-[#0a0a0a] pb-24 pt-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
           <Link
             to="/"
-            className="group flex items-center gap-3 w-fit px-6 py-3 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-white/60 hover:text-white transition-all"
+            className="group inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-medium tracking-wide text-white/60 hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
           >
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
-            Kembali
+            Beranda
           </Link>
         </div>
 

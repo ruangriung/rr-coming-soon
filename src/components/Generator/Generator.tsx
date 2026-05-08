@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ImageGenerator from './ImageGenerator.tsx';
 import VideoGenerator from './VideoGenerator.tsx';
 import AudioGenerator from './AudioGenerator.tsx';
+import BackgroundRemover from './BackgroundRemover.tsx';
 import ImageAnalysisAssistant from './ImageAnalysisAssistant.tsx';
 import ChatAssistant from './ChatAssistant.tsx';
 import BYOPHandler from './BYOPHandler.tsx';
 import PaymentRequiredModal from './PaymentRequiredModal.tsx';
-import { ImageIcon, Film, Volume2, Brain, MessageSquare, LayoutGrid } from 'lucide-react';
+import { ImageIcon, Film, Volume2, Brain, MessageSquare, LayoutGrid, Scissors } from 'lucide-react';
 
-type TabType = 'image' | 'video' | 'audio' | 'analysis' | 'chat';
+type TabType = 'image' | 'video' | 'removebg' | 'audio' | 'analysis' | 'chat';
 
 export default function Generator() {
-  const [activeTab, setActiveTab] = useState<TabType>('image');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = (searchParams.get('tab') as TabType) || 'image';
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab);
   const [keyUpdateTrigger, setKeyUpdateTrigger] = useState(0);
+
+  // Sync tab state with URL
+  useEffect(() => {
+    const tabFromUrl = searchParams.get('tab') as TabType;
+    if (tabFromUrl && tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [searchParams]);
+
+  const handleTabChange = (tabId: TabType) => {
+    setActiveTab(tabId);
+    setSearchParams({ tab: tabId });
+  };
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const handlePaymentRequired = () => setIsPaymentModalOpen(true);
@@ -20,6 +37,7 @@ export default function Generator() {
   const tabs = [
     { id: 'image', label: 'Image', icon: ImageIcon },
     { id: 'video', label: 'Video', icon: Film },
+    { id: 'removebg', label: 'BG Remover', icon: Scissors },
     { id: 'audio', label: 'Audio', icon: Volume2 },
     { id: 'analysis', label: 'Analysis', icon: Brain },
     { id: 'chat', label: 'Assistant', icon: MessageSquare },
@@ -47,22 +65,22 @@ export default function Generator() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="w-full max-w-3xl bg-white dark:bg-white/5 p-2 rounded-3xl border border-slate-200 dark:border-white/10 flex gap-1 sticky top-24 z-40 backdrop-blur-xl shadow-2xl shadow-slate-200/50 dark:shadow-none">
+      <div className="w-full max-w-4xl bg-white dark:bg-white/5 p-2 rounded-3xl border border-slate-200 dark:border-white/10 flex flex-wrap sm:flex-nowrap gap-1 sticky top-24 z-40 backdrop-blur-xl shadow-2xl shadow-slate-200/50 dark:shadow-none">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as TabType)}
-              className={`flex-1 flex flex-col items-center justify-center gap-1.5 py-4 rounded-2xl transition-all cursor-pointer ${
+              onClick={() => handleTabChange(tab.id as TabType)}
+              className={`flex-1 min-w-[70px] flex flex-col items-center justify-center gap-1.5 py-3 sm:py-4 rounded-2xl transition-all cursor-pointer ${
                 isActive 
                 ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20 scale-105 z-10' 
                 : 'text-slate-400 dark:text-white/20 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white/60'
               }`}
             >
-              <Icon size={isActive ? 22 : 18} className="transition-transform" />
-              <span className="text-[9px] font-black uppercase tracking-[0.15em]">{tab.label}</span>
+              <Icon size={isActive ? 20 : 16} className="transition-transform" />
+              <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.15em]">{tab.label}</span>
             </button>
           );
         })}
@@ -72,6 +90,7 @@ export default function Generator() {
       <div className="w-full max-w-7xl" key={keyUpdateTrigger}>
         {activeTab === 'image' && <ImageGenerator onPaymentRequired={handlePaymentRequired} />}
         {activeTab === 'video' && <VideoGenerator onPaymentRequired={handlePaymentRequired} />}
+        {activeTab === 'removebg' && <BackgroundRemover />}
         {activeTab === 'audio' && <AudioGenerator onPaymentRequired={handlePaymentRequired} />}
         {activeTab === 'analysis' && <ImageAnalysisAssistant onPaymentRequired={handlePaymentRequired} />}
         {activeTab === 'chat' && <ChatAssistant onPaymentRequired={handlePaymentRequired} />}
@@ -93,7 +112,7 @@ export default function Generator() {
           <div className="h-[1px] w-12 bg-slate-300 dark:bg-white" />
         </div>
         <p className="text-[8px] font-bold text-slate-400 dark:text-white/40 uppercase tracking-widest">
-          Pollinations AI • RuangRiung • Vercel Edge • 2026
+          Pollinations AI • RuangRiung • Cloudflare Pages • 2026
         </p>
       </div>
     </div>

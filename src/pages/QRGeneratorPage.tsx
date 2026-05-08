@@ -45,6 +45,19 @@ export default function QRGeneratorPage() {
     const canvas = qrRef.current.querySelector('canvas');
     if (!canvas) return;
 
+    // Save to IndexedDB history
+    canvas.toBlob((blob) => {
+      if (blob) {
+        import('../lib/history').then(({ saveToHistory }) => {
+          saveToHistory({
+            type: 'qr',
+            blob: blob,
+            prompt: text
+          }).catch(err => console.error('Failed to save QR to history', err));
+        });
+      }
+    });
+
     const url = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.download = `rr-qrcode-${Date.now()}.png`;
@@ -55,13 +68,13 @@ export default function QRGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] pb-24 pt-32 px-4 transition-colors duration-500 font-sans selection:bg-orange-500/20">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] pb-24 pt-12 px-4 transition-colors duration-500 font-sans selection:bg-orange-500/20">
       <div className="max-w-6xl mx-auto">
         {/* Navigation */}
         <div className="mb-12 flex items-center justify-between">
           <Link
             to="/"
-            className="group inline-flex items-center gap-3 px-6 py-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/20 transition-all"
+            className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
           >
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
             Kembali

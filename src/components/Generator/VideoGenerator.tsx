@@ -139,6 +139,16 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
             if (!response.ok) throw new Error('Gagal membuat video');
 
             const blob = await response.blob();
+            
+            // Save to IndexedDB history
+            import('../../lib/history').then(({ saveToHistory }) => {
+              saveToHistory({
+                type: 'video',
+                blob: blob,
+                prompt: prompt
+              }).catch(err => console.error('Failed to save video to history', err));
+            });
+
             setVideoUrl(URL.createObjectURL(blob));
             toast.success('Video berhasil dibuat!');
         } catch (error: any) {

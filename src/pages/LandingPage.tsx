@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Video, Image as ImageIcon, BookOpen, Key, ArrowRight, QrCode } from 'lucide-react';
+import { Sparkles, Video, Image as ImageIcon, BookOpen, Key, ArrowRight, QrCode, Scissors, Volume2, Brain, MessageSquare } from 'lucide-react';
 import ThemeToggle from '../components/UI/ThemeToggle';
 
 export default function LandingPage() {
@@ -37,20 +37,20 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] text-slate-900 dark:text-[#f0f0f0] font-sans selection:bg-orange-500/20 transition-colors duration-500 flex flex-col relative">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] text-slate-900 dark:text-[#f0f0f0] font-sans selection:bg-orange-500/20 transition-colors duration-500 flex flex-col relative overflow-x-hidden">
       
       {/* Navbar */}
-      <header className="px-6 md:px-12 py-8 flex justify-between items-center relative z-20 max-w-[1400px] w-full mx-auto">
+      <header className="px-2 md:px-12 py-6 md:py-8 flex justify-between items-center relative z-20 max-w-[1400px] w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col"
+          className="flex flex-col ml-2 md:ml-0"
         >
-          <div className="text-[10px] tracking-[0.2em] uppercase text-slate-400 dark:text-[#666] mb-1 font-medium">
+          <div className="text-[9px] tracking-[0.2em] uppercase text-slate-400 dark:text-[#666] mb-0.5 font-medium">
             RuangRiung AI Studio
           </div>
-          <h1 className="text-xl font-light tracking-tight text-slate-900 dark:text-white">
+          <h1 className="text-lg md:text-xl font-light tracking-tight text-slate-900 dark:text-white">
             ruangriung<span className="text-slate-400 dark:text-[#666]">.my.id</span>
           </h1>
         </motion.div>
@@ -59,10 +59,13 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-6"
+          className="flex items-center gap-2 md:gap-6 mr-2 md:mr-0"
         >
           <Link to="/generator" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors">
             Studio
+          </Link>
+          <Link to="/koleksi" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors">
+            Koleksiku
           </Link>
           <Link to="/kumpulan-prompt" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors hidden sm:block">
             Prompts
@@ -125,13 +128,13 @@ export default function LandingPage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link to="/generator" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+            <Link to="/generator?tab=image" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
               <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
                 <ImageIcon size={20} strokeWidth={1.5} />
               </div>
               <h4 className="text-lg font-medium mb-3">AI Image Studio</h4>
               <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
-                Generator gambar presisi tinggi dengan dukungan model terbaru untuk resolusi dan detail maksimal.
+                Generator gambar presisi tinggi dengan dukungan model terbaru untuk resolusi maksimal.
               </p>
               <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <span>Akses Tool</span>
@@ -139,7 +142,7 @@ export default function LandingPage() {
               </div>
             </Link>
 
-            <Link to="/generator" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+            <Link to="/generator?tab=video" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
               <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
                 <Video size={20} strokeWidth={1.5} />
               </div>
@@ -153,16 +156,58 @@ export default function LandingPage() {
               </div>
             </Link>
 
-            <Link to="/kumpulan-prompt" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+            <Link to="/generator?tab=removebg" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
               <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
-                <BookOpen size={20} strokeWidth={1.5} />
+                <Scissors size={20} strokeWidth={1.5} />
               </div>
-              <h4 className="text-lg font-medium mb-3">Prompt Library</h4>
+              <h4 className="text-lg font-medium mb-3">AI BG Remover</h4>
               <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
-                Repositori terkurasi yang berisi prompt arsitektural dan instruksi spesifik untuk hasil optimal.
+                Hapus latar belakang foto secara instan menggunakan teknologi AI langsung di browser.
               </p>
               <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                <span>Jelajahi Pustaka</span>
+                <span>Akses Tool</span>
+                <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </div>
+            </Link>
+
+            <Link to="/generator?tab=audio" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
+                <Volume2 size={20} strokeWidth={1.5} />
+              </div>
+              <h4 className="text-lg font-medium mb-3">AI Audio Gen</h4>
+              <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
+                Hasilkan musik dan efek suara unik berdasarkan deskripsi teks untuk proyek kreatif Anda.
+              </p>
+              <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                <span>Akses Tool</span>
+                <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </div>
+            </Link>
+
+            <Link to="/generator?tab=analysis" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
+                <Brain size={20} strokeWidth={1.5} />
+              </div>
+              <h4 className="text-lg font-medium mb-3">AI Image Analysis</h4>
+              <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
+                Dapatkan deskripsi mendalam dan analisis teknis dari gambar apa pun dengan bantuan visi AI.
+              </p>
+              <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                <span>Akses Tool</span>
+                <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </div>
+            </Link>
+
+            <Link to="/generator?tab=chat" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
+                <MessageSquare size={20} strokeWidth={1.5} />
+              </div>
+              <h4 className="text-lg font-medium mb-3">AI Assistant</h4>
+              <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
+                Asisten obrolan cerdas untuk membantu brainstorming ide, coding, dan penulisan konten.
+              </p>
+              <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                <span>Mulai Chat</span>
                 <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </div>
             </Link>
@@ -173,10 +218,24 @@ export default function LandingPage() {
               </div>
               <h4 className="text-lg font-medium mb-3">QR Generator</h4>
               <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
-                Buat QR Code dengan kustomisasi logo dan warna untuk kebutuhan distribusi tautan Anda.
+                Buat QR Code dengan kustomisasi logo dan gaya titik untuk kebutuhan branding Anda.
               </p>
               <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <span>Akses Tool</span>
+                <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </div>
+            </Link>
+
+            <Link to="/kumpulan-prompt" className="group p-8 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-2xl hover:border-slate-300 dark:hover:border-white/20 transition-colors flex flex-col h-full">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-white/60 mb-8 group-hover:text-orange-500 group-hover:bg-orange-500/10 transition-colors">
+                <BookOpen size={20} strokeWidth={1.5} />
+              </div>
+              <h4 className="text-lg font-medium mb-3">Prompt Library</h4>
+              <p className="text-sm text-slate-500 dark:text-white/40 font-light leading-relaxed mb-8 flex-grow">
+                Repositori terkurasi yang berisi prompt instruksi spesifik untuk hasil AI yang optimal.
+              </p>
+              <div className="flex items-center text-xs font-medium text-slate-400 dark:text-white/30 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                <span>Jelajahi Pustaka</span>
                 <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </div>
             </Link>

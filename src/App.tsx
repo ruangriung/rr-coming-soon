@@ -5,10 +5,12 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import ScrollToTop from './components/UI/ScrollToTop';
 import MaintenancePage from './pages/MaintenancePage';
 import LandingPage from './pages/LandingPage';
 import GeneratorPage from './pages/GeneratorPage';
 import QRGeneratorPage from './pages/QRGeneratorPage';
+import GalleryPage from './pages/GalleryPage';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import PromptList from './pages/PromptList';
@@ -22,6 +24,7 @@ import AboutUs from './pages/AboutUs';
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Toaster 
         position="top-center"
         toastOptions={{
@@ -33,6 +36,7 @@ export default function App() {
         <Route path="/maintenance" element={<MaintenancePage />} />
         <Route path="/generator" element={<GeneratorPage />} />
         <Route path="/qr-generator" element={<QRGeneratorPage />} />
+        <Route path="/koleksi" element={<GalleryPage />} />
         
         {/* Blog / Artikel Routes */}
         <Route path="/artikel" element={<ArticleList />} />

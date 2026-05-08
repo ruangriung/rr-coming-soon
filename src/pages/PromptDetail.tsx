@@ -87,7 +87,7 @@ export default function PromptDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-32 pt-32 px-6 selection:bg-orange-500/30 relative overflow-hidden transition-colors duration-500">
+    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-32 pt-12 px-6 selection:bg-orange-500/30 relative overflow-hidden transition-colors duration-500">
       {/* Background Decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
@@ -96,9 +96,10 @@ export default function PromptDetail() {
         <div className="mb-12 flex items-center justify-between">
           <Link 
             to="/kumpulan-prompt"
-            className="group inline-flex items-center gap-3 px-6 py-3 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/60 border border-slate-200 dark:border-white/10 transition-all backdrop-blur-xl"
+            className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
           >
-            <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-1" /> Kembali ke Pustaka
+            <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-1" /> 
+            Kembali
           </Link>
 
           <ThemeToggle />

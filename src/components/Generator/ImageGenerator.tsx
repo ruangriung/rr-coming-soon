@@ -5,6 +5,7 @@ import ImageModal from './ImageModal.tsx';
 import { GeneratorSettings } from './AdvancedSettings.tsx';
 import { History, Download, Maximize2, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { saveToHistory, getHistory, clearHistory, HistoryItem } from '../../lib/history';
 
 const INITIAL_SETTINGS: GeneratorSettings = {
   prompt: '',
@@ -41,9 +42,35 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [modelList, setModelList] = useState<{id: string; name: string; isPro: boolean}[]>([]);
-  const [history, setHistory] = useState<any[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('pollinations_api_key'));
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [historyUrls, setHistoryUrls] = useState<Record<string, string>>({});
+
+  const fetchHistory = async () => {
+    try {
+      const items = await getHistory();
+      setHistory(items.filter(i => i.type === 'image'));
+    } catch (err) {
+      console.error('Failed to fetch history', err);
+      setHistory([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  useEffect(() => {
+    const newUrls: Record<string, string> = {};
+    history.forEach(item => {
+      newUrls[item.id] = URL.createObjectURL(item.blob);
+    });
+    setHistoryUrls(newUrls);
+    return () => {
+      Object.values(newUrls).forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [history]);
 
   const handleEnhancePrompt = async () => {
     if (!settings.prompt) return;
@@ -88,23 +115,8 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
   }, []);
 
   useEffect(() => {
-    const savedHistory = localStorage.getItem('rr_generator_history');
-    if (savedHistory) {
-      try {
-        setHistory(JSON.parse(savedHistory));
-      } catch (e) {}
-    }
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('rr_generator_settings', JSON.stringify(settings));
   }, [settings]);
-
-  useEffect(() => {
-    if (history.length > 0) {
-      localStorage.setItem('rr_generator_history', JSON.stringify(history));
-    }
-  }, [history]);
 
   const fetchModels = async () => {
     try {
@@ -169,19 +181,23 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
         if (!response.ok) throw new Error('Gagal generate gambar');
         
         const blob = await response.blob();
+        
+        // Save to IndexedDB history (fire and forget)
+        saveToHistory({
+          type: 'image',
+          blob: blob,
+          prompt: settings.prompt,
+          metadata: { model: settings.model }
+        })
+        .then(() => fetchHistory())
+        .catch(err => console.error('Failed to save to history', err));
+
         return URL.createObjectURL(blob);
       });
 
       const urls = await Promise.all(promises);
       setImageUrls(urls);
       
-      const historyItem = {
-        prompt: settings.prompt,
-        model: settings.model,
-        urls: [urls[0]],
-        timestamp: Date.now()
-      };
-      setHistory(prev => [historyItem, ...prev].slice(0, 20));
       toast.success('Gambar berhasil dibuat!');
     } catch (err: any) {
       if (err.message !== 'Payment Required') {
@@ -235,9 +251,11 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
                 <RefreshCw size={12} /> Segarkan Model
               </button>
               <button 
-                onClick={() => {
-                  setHistory([]);
-                  localStorage.removeItem('rr_generator_history');
+                onClick={async () => {
+                  if (confirm('Hapus semua riwayat gambar?')) {
+                    await clearHistory();
+                    fetchHistory();
+                  }
                 }}
                 className="text-[10px] font-black text-slate-400 dark:text-white/20 hover:text-red-500 uppercase tracking-widest transition-all cursor-pointer"
               >
@@ -247,15 +265,19 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           </div>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {history.map((item, idx) => (
-              <div key={idx} className="group relative aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-orange-500/50 transition-all cursor-pointer shadow-lg shadow-slate-200/50 dark:shadow-none">
-                <img src={item.urls[0]} alt={item.prompt} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
+            {history.map((item) => (
+              <div key={item.id} className="group relative aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-orange-500/50 transition-all cursor-pointer shadow-lg shadow-slate-200/50 dark:shadow-none">
+                <img src={historyUrls[item.id]} alt={item.prompt} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 gap-3">
                   <p className="text-[10px] text-white/80 font-medium line-clamp-2 leading-relaxed">{item.prompt}</p>
                   <div className="flex gap-2">
                     <button 
                       onClick={() => {
-                        setSettings(prev => ({ ...prev, prompt: item.prompt, model: item.model }));
+                        setSettings(prev => ({ 
+                          ...prev, 
+                          prompt: item.prompt || '', 
+                          model: item.metadata?.model || prev.model 
+                        }));
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
                       className="flex-1 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[9px] font-black text-white uppercase tracking-wider transition-all cursor-pointer"
@@ -263,7 +285,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
                       Reuse
                     </button>
                     <button 
-                      onClick={() => setSelectedImage(item.urls[0])}
+                      onClick={() => setSelectedImage(historyUrls[item.id])}
                       className="p-2 bg-orange-500 hover:bg-orange-600 rounded-xl text-white transition-all cursor-pointer"
                     >
                       <Maximize2 size={14} />

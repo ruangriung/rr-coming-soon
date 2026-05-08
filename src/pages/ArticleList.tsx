@@ -50,16 +50,16 @@ export default function ArticleList() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-24 pt-32 px-4 transition-colors duration-500">
+    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-24 pt-12 px-4 transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
         {/* Navigation */}
         <div className="mb-12 flex items-center justify-between">
           <Link
             to="/generator"
-            className="group inline-flex items-center gap-3 px-6 py-3 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all"
+            className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
           >
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
-            Kembali ke Studio
+            Studio
           </Link>
 
           <ThemeToggle />

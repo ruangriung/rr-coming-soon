@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Image, Sparkles, Upload, Cpu, X, Copy, Check } from 'lucide-react';
+import { Image as ImageIcon, Sparkles, Upload, Cpu, X, Copy, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 import ButtonSpinner from './ButtonSpinner.tsx';
@@ -31,41 +31,71 @@ export default function ImageAnalysisAssistant({ onPaymentRequired }: { onPaymen
     setIsLoading(true);
     setAnalysisResult('');
 
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onloadend = async () => {
-      const base64String = reader.result as string;
-      try {
-        const response = await fetch('/api/pollinations/text', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [{ 
-              role: "user", 
-              content: [
-                { type: "text", text: "Jelaskan gambar ini secara detail untuk dijadikan prompt AI generator gambar. Berikan deskripsi subjek, pencahayaan, gaya seni, dan warna." }, 
-                { type: "image_url", image_url: { url: base64String } }
-              ] 
-            }],
-            model: 'openai'
-          }),
-        });
+    try {
+      // Compress and resize image before sending
+      const compressedBase64 = await new Promise<string>((resolve, reject) => {
+        const img = new window.Image();
+        img.src = previewUrl || '';
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          // Max 1024px
+          const maxDim = 1024;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = (height / width) * maxDim;
+              width = maxDim;
+            } else {
+              width = (width / height) * maxDim;
+              height = maxDim;
+            }
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', 0.7)); // 70% quality jpeg
+        };
+        img.onerror = reject;
+      });
 
-        if (response.status === 402) {
-          if (onPaymentRequired) onPaymentRequired();
-          return;
-        }
+      const response = await fetch('/api/pollinations/text', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ 
+            role: "user", 
+            content: [
+              { type: "text", text: "Jelaskan gambar ini secara detail untuk dijadikan prompt AI generator gambar. Berikan deskripsi subjek, pencahayaan, gaya seni, dan warna." }, 
+              { type: "image_url", image_url: { url: compressedBase64 } }
+            ] 
+          }],
+          model: 'openai'
+        }),
+      });
 
-        if (!response.ok) throw new Error();
-        const description = await response.text();
-        setAnalysisResult(description);
-        toast.success("Analisis selesai!");
-      } catch (err) {
-        toast.error("Gagal menganalisis gambar.");
-      } finally {
-        setIsLoading(false);
+      if (response.status === 402) {
+        if (onPaymentRequired) onPaymentRequired();
+        return;
       }
-    };
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'API Error');
+      }
+      
+      const description = await response.text();
+      setAnalysisResult(description);
+      toast.success("Analisis selesai!");
+    } catch (err: any) {
+      console.error('Analysis error:', err);
+      toast.error(err.message === 'API Error' ? "Gagal menganalisis gambar. Coba lagi nanti." : `Error: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
