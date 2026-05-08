@@ -30,9 +30,6 @@ export default function BYOPHandler({ onKeyChange }: { onKeyChange?: () => void 
     const params = new URLSearchParams({
       redirect_uri: window.location.origin + window.location.pathname,
       client_id: 'pk_hprMp1nmhXOvJE7H', 
-      scope: 'usage keys',
-      expiry: '30',
-      budget: '10'
     });
     window.location.href = `https://enter.pollinations.ai/authorize?${params.toString()}`;
   };
