@@ -36,7 +36,7 @@ export async function onRequestGet(context: any) {
       headers['Authorization'] = `Bearer ${activeKey}`;
     }
 
-    const apiUrl = 'https://gen.pollinations.ai/v1/models';
+    const apiUrl = 'https://gen.pollinations.ai/models';
     const response = await fetch(apiUrl, { headers });
 
     if (!response.ok) throw new Error(`API Error: ${response.status}`);
@@ -44,22 +44,22 @@ export async function onRequestGet(context: any) {
     const data = await response.json();
     let allModels = [];
     
-    if (data && Array.isArray(data.data)) {
-      allModels = data.data;
-    } else if (Array.isArray(data)) {
+    if (Array.isArray(data)) {
       allModels = data;
     }
 
     const imageModels = allModels
       .filter((m: any) => {
         const modalities = m.output_modalities || [];
-        return modalities.includes('image') && !modalities.includes('video') && !modalities.includes('audio');
+        return modalities.includes('image');
       })
       .map((m: any) => ({
-        id: m.id,
-        name: IMAGE_MODEL_MAPPING[m.id] || m.id.replace(/-/g, ' ').replace(/\b\w/g, (l: any) => l.toUpperCase()),
-        isPro: m.paid_only === true || m.id.toLowerCase().includes('-pro')
+        id: m.name || m.id,
+        name: IMAGE_MODEL_MAPPING[m.name || m.id] || m.name || m.id.replace(/-/g, ' ').replace(/\b\w/g, (l: any) => l.toUpperCase()),
+        isPro: m.paid_only === true
       }));
+
+    console.log('Filtered image models count:', imageModels.length);
 
     if (imageModels.length === 0) {
       return new Response(JSON.stringify([
