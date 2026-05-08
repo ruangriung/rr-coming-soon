@@ -128,7 +128,15 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
             if (typeof m === 'string') return { id: m, name: m, isPro: m.includes('-pro') };
             return { id: m.id || m.name, name: m.name, isPro: m.isPro };
           });
-          if (apiModels.length > 0) setModelList(apiModels);
+          const paidModels = apiModels.filter(model => model.isPro);
+          const finalModels = paidModels.length > 0 ? paidModels : apiModels;
+          if (finalModels.length > 0) {
+            setModelList(finalModels);
+            setSettings(prev => ({
+              ...prev,
+              model: finalModels.some(model => model.id === prev.model) ? prev.model : finalModels[0].id
+            }));
+          }
         }
       }
     } catch (err) {

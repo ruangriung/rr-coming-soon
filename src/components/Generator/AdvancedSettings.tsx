@@ -23,7 +23,7 @@ export interface GeneratorSettings {
 interface AdvancedSettingsProps {
   settings: GeneratorSettings;
   setSettings: React.Dispatch<React.SetStateAction<GeneratorSettings>>;
-  models: {name: string; isPro: boolean; description?: string}[];
+  models: {id: string; name: string; isPro: boolean; description?: string}[];
   aspectRatio: 'Kotak' | 'Portrait' | 'Lansekap' | 'Custom';
   onAspectRatioChange: (preset: 'Kotak' | 'Portrait' | 'Lansekap') => void;
   onManualDimensionChange: (width: number, height: number) => void;
@@ -58,7 +58,7 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
   const inputStyle = "w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 focus:border-orange-500/50 transition-all text-slate-900 dark:text-white font-bold text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-white/20";
   const selectStyle = `${inputStyle} appearance-none cursor-pointer`;
   
-  const activeModelInfo = models.find(m => m.name === settings.model);
+  const activeModelInfo = models.find(m => m.id === settings.model);
 
   return (
     <div className={`space-y-6 ${className || ''}`}>
@@ -87,7 +87,7 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
               className={selectStyle}
             >
               {models.map(m => (
-                <option key={m.name} value={m.name} className="bg-white dark:bg-[#1a1a1a] text-slate-900 dark:text-white">
+                <option key={m.id} value={m.id} className="bg-white dark:bg-[#1a1a1a] text-slate-900 dark:text-white">
                   {m.name.toUpperCase()} {m.isPro ? '✨ (PRO)' : ''}
                 </option>
               ))}

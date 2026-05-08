@@ -12,7 +12,7 @@ interface ControlPanelProps {
   isEnhancing: boolean;
   onEnhancePrompt: () => void;
   onCopyJson: () => void;
-  models: {name: string; isPro: boolean}[];
+  models: {id: string; name: string; isPro: boolean; description?: string}[];
 }
 
 const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnhancing, onEnhancePrompt, onCopyJson, models }: ControlPanelProps) => {
