@@ -53,7 +53,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          prompt: `As an AI image prompt engineer, enhance this short description into a professional, highly detailed image prompt. Focus on artistic style, lighting, composition, and high-quality textures. Keep it concise but powerful. The original prompt is: "${settings.prompt}"`
+          prompt: `As an AI image prompt engineer, enhance this short description into a professional, highly detailed image prompt. Focus on artistic style, lighting, composition, and high-quality textures. Keep it concise but powerful. IMPORTANT: Return ONLY the raw prompt text. Do not use any markdown formatting, do not use asterisks, and do not include labels like "Image Prompt:". The original prompt is: "${settings.prompt}"`
         })
       });
 

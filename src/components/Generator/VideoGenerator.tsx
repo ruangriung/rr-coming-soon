@@ -55,7 +55,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    prompt: `As an AI video prompt engineer, enhance this short description into a professional, cinematic video prompt. Focus on lighting, camera movement, textures, and atmosphere. Keep it under 200 words but make it highly descriptive. The original prompt is: "${prompt}"`
+                    prompt: `As an AI video prompt engineer, enhance this short description into a professional, cinematic video prompt. Focus on lighting, camera movement, textures, and atmosphere. Keep it under 200 words but make it highly descriptive. IMPORTANT: Return ONLY the raw prompt text. Do not use any markdown formatting, do not use asterisks, and do not include labels like "Video Prompt:". The original prompt is: "${prompt}"`
                 })
             });
 
