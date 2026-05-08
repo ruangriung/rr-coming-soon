@@ -68,27 +68,11 @@ export async function onRequest(context: any) {
       headers['Authorization'] = `Bearer ${activeApiKey}`;
     }
 
-    let response;
-    if (method === 'POST') {
-      // Use POST for large payloads (like base64 images)
-      headers['Content-Type'] = 'application/json';
-      response = await fetch(baseUrl, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          ...params,
-          prompt,
-          key: activeApiKey
-        })
-      });
-    } else {
-      // Use GET for standard requests
-      const apiUrl = `${baseUrl}?${pollParams.toString()}`;
-      response = await fetch(apiUrl, {
-        method: 'GET',
-        headers,
-      });
-    }
+    const apiUrl = `${baseUrl}?${pollParams.toString()}`;
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers,
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
