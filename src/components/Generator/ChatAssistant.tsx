@@ -30,7 +30,10 @@ export default function ChatAssistant({ onPaymentRequired }: { onPaymentRequired
     try {
       const response = await fetch('/api/pollinations/text', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+        },
         body: JSON.stringify({
           messages: [...messages, userMessage],
           model: 'openai'

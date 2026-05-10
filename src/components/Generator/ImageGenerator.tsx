@@ -120,20 +120,51 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   const fetchModels = async () => {
     try {
-      const response = await fetch('/api/pollinations/models/image');
+      let response = await fetch('/api/pollinations/models/image', {
+        headers: {
+          'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+        }
+      });
+
+      // Fallback to direct API if proxy fails
+      if (!response.ok) {
+        console.warn("Proxy API failed, falling back to direct Pollinations API");
+        response = await fetch('https://gen.pollinations.ai/models', {
+          headers: {
+            'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+          }
+        });
+      }
+
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
-          const apiModels = data.map(m => {
-            if (typeof m === 'string') return { id: m, name: m, isPro: m.includes('-pro') };
-            return { id: m.id || m.name, name: m.name, isPro: m.isPro };
-          });
+          const apiModels = data
+            .filter(m => {
+              if (typeof m === 'string') return true;
+              // Jika data dari proxy, sudah di-filter di backend (tidak ada output_modalities)
+              if (!m.output_modalities) return true;
+              const modalities = m.output_modalities || [];
+              return modalities.includes('image');
+            })
+            .map(m => {
+              if (typeof m === 'string') return { id: m, name: m, isPro: m.includes('-pro') };
+              return { 
+                id: m.id || m.name, 
+                name: m.name || (m.id ? m.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Unknown'), 
+                isPro: m.isPro || m.paid_only || false 
+              };
+            });
+
           if (apiModels.length > 0) {
             setModelList(apiModels);
-            setSettings(prev => ({
-              ...prev,
-              model: apiModels.some(model => model.id === prev.model) ? prev.model : apiModels[0].id
-            }));
+            setSettings(prev => {
+              const currentModelExists = apiModels.some(m => m.id === prev.model);
+              return {
+                ...prev,
+                model: currentModelExists ? prev.model : apiModels[0].id
+              };
+            });
           }
         }
       }
@@ -144,7 +175,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   useEffect(() => {
     fetchModels();
-  }, []);
+  }, [isLoggedIn]);
 
   const handleGenerate = async () => {
     if (!settings.prompt.trim()) {
@@ -170,7 +201,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           image: inputImages && inputImages[0] ? inputImages[0] : undefined
         };
 
-        const response = await fetch('/api/pollinations/image', {
+        let response = await fetch('/api/pollinations/image', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -178,6 +209,25 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           },
           body: JSON.stringify(body)
         });
+
+        // Fallback to direct API if proxy fails
+        if (!response.ok) {
+          console.warn("Proxy generation failed, falling back to direct Pollinations API");
+          const pollParams = new URLSearchParams();
+          Object.entries(body).forEach(([key, val]) => {
+            if (val !== undefined && val !== null) pollParams.set(key, String(val));
+          });
+          const activeKey = localStorage.getItem('pollinations_api_key');
+          if (activeKey) pollParams.set('key', activeKey);
+          
+          const directUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(settings.prompt)}?${pollParams.toString()}`;
+          response = await fetch(directUrl, {
+            headers: {
+              'Accept': 'image/*',
+              'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+            }
+          });
+        }
 
         if (response.status === 402) {
           if (onPaymentRequired) onPaymentRequired();

@@ -64,7 +64,10 @@ export default function ImageAnalysisAssistant({ onPaymentRequired }: { onPaymen
 
       const response = await fetch('/api/pollinations/text', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+        },
         body: JSON.stringify({
           messages: [{ 
             role: "user", 

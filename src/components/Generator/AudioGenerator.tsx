@@ -34,7 +34,31 @@ export default function AudioGenerator({ onPaymentRequired }: { onPaymentRequire
     setPreviewingVoice(voice);
     try {
       const params = new URLSearchParams({ text: 'Ini adalah contoh suara.', voice });
-      const response = await fetch(`/api/generate-audio?${params.toString()}`);
+      let response = await fetch(`/api/generate-audio?${params.toString()}`, {
+        headers: {
+          'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+        }
+      });
+      
+      // Fallback to direct API if proxy fails
+      if (!response.ok) {
+        console.warn("Proxy preview failed, falling back to direct Pollinations API");
+        const activeKey = localStorage.getItem('pollinations_api_key');
+        const queryParams = new URLSearchParams({
+            voice: voice,
+            response_format: 'mp3',
+            model: 'tts-1',
+        });
+        if (activeKey) queryParams.set('key', activeKey);
+        
+        const directUrl = `https://gen.pollinations.ai/audio/${encodeURIComponent('Ini adalah contoh suara.')}?${queryParams.toString()}`;
+        response = await fetch(directUrl, {
+            headers: {
+                'Accept': 'audio/mpeg',
+                'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+            }
+        });
+      }
       
       if (response.status === 402) {
         if (onPaymentRequired) onPaymentRequired();
@@ -67,7 +91,31 @@ export default function AudioGenerator({ onPaymentRequired }: { onPaymentRequire
 
     try {
       const params = new URLSearchParams({ text, voice: selectedVoice });
-      const response = await fetch(`/api/generate-audio?${params.toString()}`);
+      let response = await fetch(`/api/generate-audio?${params.toString()}`, {
+        headers: {
+          'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+        }
+      });
+      
+      // Fallback to direct API if proxy fails
+      if (!response.ok) {
+        console.warn("Proxy generation failed, falling back to direct Pollinations API");
+        const activeKey = localStorage.getItem('pollinations_api_key');
+        const queryParams = new URLSearchParams({
+            voice: selectedVoice,
+            response_format: 'mp3',
+            model: 'tts-1',
+        });
+        if (activeKey) queryParams.set('key', activeKey);
+        
+        const directUrl = `https://gen.pollinations.ai/audio/${encodeURIComponent(text)}?${queryParams.toString()}`;
+        response = await fetch(directUrl, {
+            headers: {
+                'Accept': 'audio/mpeg',
+                'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+            }
+        });
+      }
       
       if (response.status === 402) {
         if (onPaymentRequired) onPaymentRequired();

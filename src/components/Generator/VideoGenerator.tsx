@@ -26,22 +26,44 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
 
     const fetchModels = async () => {
         try {
-            const response = await fetch('https://gen.pollinations.ai/models');
-            if (response.ok) {
-                const allModels = await response.json();
-                const videoModels = allModels
-                    .filter((m: any) => m.output_modalities && m.output_modalities.includes('video'))
-                    .map((m: any) => ({
-                        id: m.name,
-                        name: m.name.charAt(0).toUpperCase() + m.name.slice(1),
-                        isPro: m.paid_only || false,
-                        description: m.description,
-                        cost: m.pricing?.completionVideoSeconds ? `${m.pricing.completionVideoSeconds} pollen/sec` : undefined
-                    }));
+            let response = await fetch('/api/pollinations/models/video', {
+                headers: {
+                    'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+                }
+            });
 
-                if (videoModels && videoModels.length > 0) {
+            // Fallback to direct API if proxy fails (500 or 404)
+            if (!response.ok) {
+                console.warn("Proxy API failed, falling back to direct Pollinations API");
+                response = await fetch('https://gen.pollinations.ai/models', {
+                    headers: {
+                        'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
+                    }
+                });
+            }
+
+            if (response.ok) {
+                const data = await response.json();
+                let videoModels = [];
+                
+                if (Array.isArray(data)) {
+                    // Direct API or Array response from proxy
+                    videoModels = data.filter((m: any) => {
+                        if (!m.output_modalities) return true; // Data dari proxy sudah di-filter
+                        const modalities = m.output_modalities || [];
+                        const id = (m.id || '').toLowerCase();
+                        return modalities.includes('video') || id.includes('video') || id.includes('veo') || id.includes('wan');
+                    }).map((m: any) => ({
+                        id: m.id || m.name,
+                        name: m.name || (m.id ? m.id.charAt(0).toUpperCase() + m.id.slice(1) : 'Unknown'),
+                        isPro: m.isPro || m.paid_only || false,
+                        description: m.description,
+                        cost: m.cost || (m.pricing?.completionVideoSeconds ? `${m.pricing.completionVideoSeconds} pollen/sec` : undefined)
+                    }));
+                }
+
+                if (videoModels.length > 0) {
                     setModels(videoModels);
-                    // If current model is not in the new list, pick the first one or keep veo
                     if (!videoModels.find((m: any) => m.id === model)) {
                         const hasVeo = videoModels.find((m: any) => m.id === 'veo');
                         setModel(hasVeo ? 'veo' : videoModels[0].id);
@@ -55,7 +77,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
 
     useEffect(() => {
         fetchModels();
-    }, []);
+    }, [isLoggedIn]);
 
     const handleEnhancePrompt = async () => {
         if (!prompt) return;
@@ -115,7 +137,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
             const width = wRatio > hRatio ? 1280 : (wRatio === hRatio ? 1024 : 720);
             const height = Math.round(width * (hRatio / wRatio));
 
-            const response = await fetch('/api/pollinations/video', {
+            let response = await fetch('/api/pollinations/video', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -130,6 +152,28 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                     height
                 })
             });
+
+            // Fallback to direct API if proxy fails
+            if (!response.ok) {
+                console.warn("Proxy generation failed, falling back to direct Pollinations API");
+                const activeKey = localStorage.getItem('pollinations_api_key');
+                const pollParams = new URLSearchParams({
+                    model,
+                    negative_prompt: negativePrompt,
+                    seed: (seed === '-1' ? Math.floor(Math.random() * 1000000) : parseInt(seed)).toString(),
+                    width: width.toString(),
+                    height: height.toString()
+                });
+                if (activeKey) pollParams.set('key', activeKey);
+                
+                const directUrl = `https://gen.pollinations.ai/video/${encodeURIComponent(prompt)}?${pollParams.toString()}`;
+                response = await fetch(directUrl, {
+                    headers: {
+                        'Accept': 'video/*',
+                        'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+                    }
+                });
+            }
 
             if (response.status === 402) {
                 if (onPaymentRequired) onPaymentRequired();
