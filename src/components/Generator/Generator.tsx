@@ -65,7 +65,7 @@ export default function Generator() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="w-full max-w-4xl bg-white dark:bg-white/5 p-2 rounded-3xl border border-slate-200 dark:border-white/10 flex flex-wrap sm:flex-nowrap gap-1 sticky top-24 z-40 backdrop-blur-xl shadow-2xl shadow-slate-200/50 dark:shadow-none">
+      <div className="w-full max-w-4xl bg-white dark:bg-white/5 p-2 rounded-3xl border border-slate-200 dark:border-white/10 flex flex-wrap sm:flex-nowrap gap-1 relative shadow-2xl shadow-slate-200/50 dark:shadow-none">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
