@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Video, Sparkles, Download, Wand2, Plus, AlertCircle, RefreshCw, X } from 'lucide-react';
+import { Video, Sparkles, Download, Wand2, Plus, AlertCircle, RefreshCw, X, Lock, Key, ArrowRight, Zap, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequired?: () => void }) {
@@ -13,6 +13,14 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
     const [isEnhancing, setIsEnhancing] = useState(false);
     const [videoUrl, setVideoUrl] = useState<string | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('pollinations_api_key'));
+
+    const handleConnectBYOP = () => {
+        const params = new URLSearchParams({
+            redirect_uri: window.location.origin + window.location.pathname + '?tab=video',
+            client_id: 'pk_hprMp1nmhXOvJE7H', 
+        });
+        window.location.href = `https://enter.pollinations.ai/authorize?${params.toString()}`;
+    };
 
     useEffect(() => {
         const checkAuth = () => {
@@ -201,6 +209,92 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
             setIsLoading(false);
         }
     };
+
+    if (!isLoggedIn) {
+        return (
+            <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
+                <div className="p-8 md:p-12 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col items-center text-center gap-6 max-w-2xl mx-auto backdrop-blur-xl">
+                    {/* Glowing background highlights */}
+                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px]" />
+                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px]" />
+
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20 shadow-sm animate-pulse">
+                        <Sparkles size={12} className="text-orange-500" />
+                        <span className="text-[10px] font-black text-orange-600 dark:text-orange-500 uppercase tracking-widest italic">PRO FEATURE</span>
+                    </div>
+
+                    {/* Animated Pulsing Icon */}
+                    <div className="relative flex items-center justify-center w-24 h-24 rounded-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-inner group">
+                        <div className="absolute inset-0 rounded-full bg-orange-500/10 dark:bg-orange-500/20 animate-ping duration-1000 scale-90" />
+                        <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                            <Video size={28} strokeWidth={1.5} />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-orange-500 border border-slate-800 shadow-md">
+                            <Lock size={14} />
+                        </div>
+                    </div>
+
+                    {/* Content text */}
+                    <div className="space-y-3 max-w-md">
+                        <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter italic">
+                            Aktifkan AI Video Creator
+                        </h3>
+                        <p className="text-slate-500 dark:text-slate-400 font-bold text-xs uppercase tracking-wider leading-relaxed">
+                            Hubungkan akun BYOP (Bring Your Own Pollen) Anda untuk mengubah deskripsi teks menjadi runtutan video sinematik yang menakjubkan.
+                        </p>
+                    </div>
+
+                    {/* Key Benefits */}
+                    <div className="w-full max-w-md grid grid-cols-1 gap-3 py-4 border-y border-slate-100 dark:border-white/5">
+                        <div className="flex items-center gap-3 text-left p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.01] border border-slate-100 dark:border-white/[0.02]">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <Sparkles size={14} />
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-wider leading-none mb-1">Model Video Kelas Dunia</h4>
+                                <p className="text-[9px] text-slate-500 dark:text-white/40 font-bold uppercase tracking-tight">Veo 3.1 Pro, LTX Video, Wan-2.1</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-3 text-left p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.01] border border-slate-100 dark:border-white/[0.02]">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <Zap size={14} />
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-wider leading-none mb-1">Super Fast Rendering</h4>
+                                <p className="text-[9px] text-slate-500 dark:text-white/40 font-bold uppercase tracking-tight">Rendering cepat tanpa batas antrean gratis</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 text-left p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.01] border border-slate-100 dark:border-white/[0.02]">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <ShieldCheck size={14} />
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-wider leading-none mb-1">Bebas Watermark & Komersial</h4>
+                                <p className="text-[9px] text-slate-500 dark:text-white/40 font-bold uppercase tracking-tight">Hasil video bersih siap digunakan secara profesional</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Glowing CTA Button */}
+                    <button
+                        onClick={handleConnectBYOP}
+                        className="group flex items-center gap-3 px-8 h-16 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-orange-500/20 cursor-pointer w-full max-w-md justify-center"
+                    >
+                        <Key size={18} />
+                        Hubungkan Akun PRO (BYOP)
+                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+
+                    <p className="text-[9px] text-slate-400 dark:text-white/30 italic font-medium">
+                        Memerlukan kunci Pollinations.ai dengan saldo Pollen aktif.
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
