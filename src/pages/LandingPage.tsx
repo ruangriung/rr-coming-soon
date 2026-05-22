@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Video, Image as ImageIcon, BookOpen, Key, ArrowRight, QrCode, Scissors, Volume2, Brain, MessageSquare } from 'lucide-react';
-import ThemeToggle from '../components/UI/ThemeToggle';
 
 export default function LandingPage() {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -33,19 +32,19 @@ export default function LandingPage() {
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any } }
   };
 
   return (
     <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] text-slate-900 dark:text-[#f0f0f0] font-sans selection:bg-orange-500/20 transition-colors duration-500 flex flex-col relative overflow-x-hidden">
       
       {/* Navbar */}
-      <header className="px-2 md:px-12 py-6 md:py-8 flex justify-between items-center relative z-20 max-w-[1400px] w-full mx-auto">
+      <header className="px-6 md:px-12 py-6 md:py-8 flex justify-between items-center relative z-20 max-w-[1400px] w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col ml-2 md:ml-0"
+          className="flex flex-col"
         >
           <div className="text-[9px] tracking-[0.2em] uppercase text-slate-400 dark:text-[#666] mb-0.5 font-medium">
             RuangRiung AI Studio
@@ -53,24 +52,6 @@ export default function LandingPage() {
           <h1 className="text-lg md:text-xl font-light tracking-tight text-slate-900 dark:text-white">
             ruangriung<span className="text-slate-400 dark:text-[#666]">.my.id</span>
           </h1>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 md:gap-6 mr-2 md:mr-0"
-        >
-          <Link to="/generator" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors">
-            Studio
-          </Link>
-          <Link to="/koleksi" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors">
-            Koleksiku
-          </Link>
-          <Link to="/kumpulan-prompt" className="text-xs font-medium tracking-wide text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white transition-colors hidden sm:block">
-            Prompts
-          </Link>
-          <ThemeToggle />
         </motion.div>
       </header>
 
@@ -82,7 +63,7 @@ export default function LandingPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="pt-20 md:pt-32 flex flex-col items-center md:items-start text-center md:text-left relative"
+          className="pt-10 md:pt-20 flex flex-col items-center md:items-start text-center md:text-left relative"
         >
           {/* Subtle Glow */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -104,7 +85,7 @@ export default function LandingPage() {
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link 
               to="/generator" 
-              className="group flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-medium tracking-widest uppercase rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-lg shadow-slate-900/10 dark:shadow-white/5 active:scale-[0.98]"
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-orange-500 text-white text-xs font-medium tracking-widest uppercase rounded-xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 active:scale-[0.98]"
             >
               Mulai Berkarya
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

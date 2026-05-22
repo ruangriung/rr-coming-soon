@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Copy, User, Calendar, Terminal, Zap, ChevronLeft, ChevronRight, Share2, Twitter, Facebook, Link as LinkIcon } from 'lucide-react';
 import { parseMarkdown } from '../lib/markdown';
-import ThemeToggle from '../components/UI/ThemeToggle';
 import toast from 'react-hot-toast';
 
 export default function PromptDetail() {
@@ -93,7 +92,7 @@ export default function PromptDetail() {
 
       <div className="max-w-4xl mx-auto">
         {/* Navigation */}
-        <div className="mb-12 flex items-center justify-between">
+        <div className="mb-12 flex items-center justify-start">
           <Link 
             to="/kumpulan-prompt"
             className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
@@ -101,8 +100,6 @@ export default function PromptDetail() {
             <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-1" /> 
             Kembali
           </Link>
-
-          <ThemeToggle />
         </div>
 
         <div className="space-y-12">

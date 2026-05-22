@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Share2, Facebook, Twitter, Link as LinkIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { parseMarkdown } from '../lib/markdown';
-import ThemeToggle from '../components/UI/ThemeToggle';
 import toast from 'react-hot-toast';
 
 export default function ArticleDetail() {
@@ -84,7 +83,7 @@ export default function ArticleDetail() {
 
       <div className="max-w-4xl mx-auto">
         {/* Navigation */}
-        <div className="mb-12 flex items-center justify-between">
+        <div className="mb-12 flex items-center justify-start">
           <Link 
             to="/artikel"
             className="group inline-flex items-center gap-3 px-6 py-3 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/60 border border-slate-200 dark:border-white/10 transition-all backdrop-blur-xl"
@@ -92,8 +91,6 @@ export default function ArticleDetail() {
             <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-1" /> 
             Beranda Artikel
           </Link>
-
-          <ThemeToggle />
         </div>
 
         {/* Header Content */}

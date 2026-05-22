@@ -1,6 +1,8 @@
-import React, { memo, useCallback, useState, useEffect } from 'react';
-import { ImageIcon, X, Info } from 'lucide-react';
+import React, { memo, useCallback, useState, useEffect, useRef } from 'react';
+import { ImageIcon, X, Info, Crown, ChevronDown } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { motion, AnimatePresence } from 'motion/react';
+import ConnectProModal from './ConnectProModal.tsx';
 
 export interface GeneratorSettings {
   prompt: string;
@@ -33,27 +35,56 @@ interface AdvancedSettingsProps {
 }
 
 const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onAspectRatioChange, onManualDimensionChange, onImageQualityChange, className, onModelSelect }: AdvancedSettingsProps) => {
-  
+  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
+  const [selectedProModel, setSelectedProModel] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isDropdownOpen]);
+
   const isProModel = useCallback((modelName: string) => {
     const normalized = modelName.toLowerCase();
     return normalized.includes('-pro') || 
-           ['nanobanana', 'nanobanana-2', 'seedream5', 'grok-imagine', 'nova-canvas', 'p-image', 'veo', 'seedance', 'wan', 'wan-fast', 'p-video'].includes(normalized);
+           ['nanobanana', 'nanobanana-2', 'seedream5', 'grok-imagine', 'nova-canvas', 'p-image', 'veo', 'seedance', 'wan', 'wan-fast', 'p-video', 'gpt-image-2'].includes(normalized);
+  }, []);
+
+  const handleConfirmConnect = useCallback(() => {
+    const params = new URLSearchParams({
+      redirect_uri: window.location.origin + window.location.pathname,
+      client_id: 'pk_hprMp1nmhXOvJE7H', 
+      scope: 'usage keys',
+      expiry: '30',
+      budget: '10'
+    });
+    window.location.href = `https://enter.pollinations.ai/authorize?${params.toString()}`;
   }, []);
 
   const handleSettingChange = useCallback((field: keyof GeneratorSettings, value: any) => {
     if (field === 'model') {
       const modelName = value as string;
-      const isPro = isProModel(modelName);
+      const modelObj = models.find(m => m.id === modelName);
+      const isPro = modelObj?.isPro || isProModel(modelName);
       const hasApiKey = !!localStorage.getItem('pollinations_api_key');
 
       if (isPro && !hasApiKey) {
-        toast.error('Model PRO memerlukan akun terhubung.');
+        setSelectedProModel(modelObj?.name || modelName);
+        setIsConnectModalOpen(true);
+        return;
       }
       onModelSelect(modelName);
     } else {
       setSettings(prev => ({ ...prev, [field]: value }));
     }
-  }, [onModelSelect, setSettings, isProModel]);
+  }, [onModelSelect, setSettings, isProModel, models]);
 
   const inputStyle = "w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 focus:border-orange-500/50 transition-all text-slate-900 dark:text-white font-bold text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-white/20";
   const selectStyle = `${inputStyle} appearance-none cursor-pointer`;
@@ -61,7 +92,8 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
   const activeModelInfo = models.find(m => m.id === settings.model);
 
   return (
-    <div className={`space-y-6 ${className || ''}`}>
+    <>
+      <div className={`space-y-6 ${className || ''}`}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest mb-2">Aspek Rasio</label>
@@ -78,20 +110,69 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
           </div>
         </div>
 
-        <div>
+        <div ref={dropdownRef}>
           <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest mb-2">Pilih Mesin AI</label>
           <div className="relative">
-            <select 
-              value={settings.model} 
-              onChange={(e) => handleSettingChange('model', e.target.value)}
-              className={selectStyle}
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 focus:border-orange-500/50 transition-all text-slate-900 dark:text-white font-bold text-sm outline-none flex items-center justify-between cursor-pointer"
             >
-              {models.map(m => (
-                <option key={m.id} value={m.id} className="bg-white dark:bg-[#1a1a1a] text-slate-900 dark:text-white">
-                  {m.name.toUpperCase()} {m.isPro ? '✨ (PRO)' : ''}
-                </option>
-              ))}
-            </select>
+              <span className="flex items-center gap-2">
+                {activeModelInfo ? activeModelInfo.name.toUpperCase() : settings.model.toUpperCase()}
+                {((activeModelInfo && activeModelInfo.isPro) || isProModel(settings.model)) && (
+                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-wider border border-orange-500/20">
+                    <Crown size={10} className="fill-orange-500/20 text-orange-500" />
+                    PRO
+                  </span>
+                )}
+              </span>
+              <ChevronDown size={16} className={`text-slate-400 dark:text-white/40 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                  transition={{ duration: 0.15, ease: 'easeOut' }}
+                  className="absolute z-[150] w-full mt-2 bg-white dark:bg-[#121212] border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden p-1.5 space-y-1"
+                >
+                  {models.map(m => {
+                    const isPro = m.isPro || isProModel(m.id);
+                    const isSelected = settings.model === m.id;
+                    return (
+                      <button
+                        key={m.id}
+                        type="button"
+                        onClick={() => {
+                          handleSettingChange('model', m.id);
+                          setIsDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${
+                          isSelected 
+                            ? 'bg-orange-500 text-white' 
+                            : 'text-slate-700 dark:text-white/80 hover:bg-slate-100 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        <span>{m.name.toUpperCase()}</span>
+                        {isPro && (
+                          <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${
+                            isSelected 
+                              ? 'bg-white/20 text-white border-white/25' 
+                              : 'bg-orange-500/10 text-orange-500 border-orange-500/20'
+                          }`}>
+                            <Crown size={10} className={isSelected ? "fill-white/20 text-white" : "fill-orange-500/20 text-orange-500"} />
+                            PRO
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -192,7 +273,17 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
         ))}
       </div>
     </div>
-  );
+    <ConnectProModal 
+      isOpen={isConnectModalOpen}
+      onClose={() => {
+        setIsConnectModalOpen(false);
+        setSelectedProModel(null);
+      }}
+      onConfirm={handleConfirmConnect}
+      modelName={selectedProModel || undefined}
+    />
+  </>
+);
 });
 
 AdvancedSettings.displayName = 'AdvancedSettings';

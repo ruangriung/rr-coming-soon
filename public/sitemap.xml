@@ -2,27 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ruangriung.my.id/</loc>
-    <lastmod>2026-05-19T04:05:03.647Z</lastmod>
+    <lastmod>2026-05-22T18:52:34.874Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ruangriung.my.id/artikel</loc>
-    <lastmod>2026-05-19T04:05:03.649Z</lastmod>
+    <lastmod>2026-05-22T18:52:34.876Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ruangriung.my.id/kumpulan-prompt</loc>
-    <lastmod>2026-05-19T04:05:03.649Z</lastmod>
+    <lastmod>2026-05-22T18:52:34.876Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ruangriung.my.id/generator</loc>
-    <lastmod>2026-05-19T04:05:03.649Z</lastmod>
+    <lastmod>2026-05-22T18:52:34.876Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ruangriung.my.id/artikel/panduan-ai-video-shot-list-otomatis-storyboard-cepat-dan-sync-potongan-video-yang-konsisten-di-ruangriung</loc>
+    <lastmod>2026-05-22T08:23:55.736Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ruangriung.my.id/artikel/panduan-ai-caption-subtitle-otomatis-bikin-video-makin-tertib-akurat-dan-siap-diunggah-di-ruangriung</loc>
+    <lastmod>2026-05-19T08:30:39.997Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ruangriung.my.id/artikel/panduan-ai-motion-video-membuat-animasi-halus-dari-gambar-diam-di-ruangriung-teknik-checklist</loc>
+    <lastmod>2026-05-16T07:18:26.473Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ruangriung.my.id/artikel/panduan-ai-image-upscaling-noise-reduction-di-ruangriung-hasil-tajam-tetap-natural</loc>
+    <lastmod>2026-05-13T07:52:35.708Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ruangriung.my.id/artikel/panduan-keamanan-etika-ai-video-watermarking-deteksi-deepfake-dan-otentikasi-kreator-di-ruangriung</loc>
+    <lastmod>2026-05-10T07:26:50.724Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ruangriung.my.id/artikel/selamat-datang-di-ruangriung-ai-studio-terbaru</loc>

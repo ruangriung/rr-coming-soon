@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Trash2, Image as ImageIcon, Video, QrCode } from 'lucide-react';
-import ThemeToggle from '../components/UI/ThemeToggle';
 import { getHistory, removeFromHistory, clearHistory, HistoryItem } from '../lib/history';
 import toast from 'react-hot-toast';
 
@@ -75,7 +74,7 @@ export default function GalleryPage() {
     <div className="min-h-screen bg-[#fafafa] dark:bg-[#0a0a0a] pb-24 pt-12 px-4 transition-colors duration-500 font-sans selection:bg-orange-500/20">
       <div className="max-w-6xl mx-auto">
         {/* Navigation */}
-        <div className="mb-12 flex items-center justify-between">
+        <div className="mb-12 flex items-center justify-start">
           <Link
             to="/"
             className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"
@@ -83,7 +82,6 @@ export default function GalleryPage() {
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
             Beranda
           </Link>
-          <ThemeToggle />
         </div>
 
         {/* Header */}

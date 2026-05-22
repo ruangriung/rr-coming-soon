@@ -1,30 +1,35 @@
 // functions/api/pollinations/models/image.ts
 
 const IMAGE_MODEL_MAPPING: Record<string, string> = {
-  'flux': 'Flux.1 Schnell',
-  'flux-pro': 'Flux.1 Pro',
-  'flux-realism': 'Flux Realism',
-  'flux-anime': 'Flux Anime',
-  'flux-3d': 'Flux 3D Render',
-  'flux-civitai': 'Flux CivitAI',
-  'any-dark': 'Any Dark V3',
-  'turbo': 'SDXL Turbo',
-  'stable-diffusion-xl': 'Stable Diffusion XL',
-  'dalle-3': 'DALL-E 3',
-  'midjourney': 'Midjourney Style',
-  'ideogram': 'Ideogram v2',
-  'aura-flow': 'Aura Flow',
-  'recraft-v3': 'Recraft v3'
+  'flux': 'Flux Schnell',
+  'klein': 'Flux Klein 4B',
+  'zimage': 'Z-Image Turbo',
+  'kontext': 'Flux Kontext (In-context)',
+  'wan-image': 'Wan 2.7 Image',
+  'wan-image-pro': 'Wan 2.7 Image Pro (4K Thinking)',
+  'qwen-image': 'Qwen Image Plus',
+  'gptimage': 'GPT Image 1 Mini',
+  'gptimage-large': 'GPT Image 1.5',
+  'gpt-image-2': 'GPT Image 2 (Premium Pro)',
+  'nanobanana': 'NanoBanana (Fast)',
+  'nanobanana-2': 'NanoBanana 2',
+  'nanobanana-pro': 'NanoBanana Pro (Gemini 3 Pro)',
+  'seedream': 'Seedream 4.0 (Photorealistic)',
+  'seedream5': 'Seedream 5.0 Lite',
+  'seedream-pro': 'Seedream 4.5 Pro (Premium Photo)',
+  'grok-imagine': 'Grok Imagine',
+  'grok-imagine-pro': 'Grok Imagine Pro (Aurora)',
+  'p-image': 'Pruna Image (Fast)',
+  'p-image-edit': 'Pruna Image Edit',
+  'nova-canvas': 'Amazon Nova Canvas'
 };
 
 export async function onRequestGet(context: any) {
   const { request } = context;
   
   try {
-    const POLLINATIONS_API_KEY = context.env.POLLINATIONS_API_KEY || context.env.NEXT_PUBLIC_POLLINATIONS_TOKEN;
     const clientKey = request.headers.get('x-pollinations-key') || 
                       request.headers.get('Authorization')?.replace('Bearer ', '');
-    const activeKey = clientKey || POLLINATIONS_API_KEY;
     
     const headers: Record<string, string> = {
       'Accept': 'application/json',
@@ -32,8 +37,10 @@ export async function onRequestGet(context: any) {
       'User-Agent': 'RuangRiung-Generator/1.0',
     };
 
-    if (activeKey) {
-      headers['Authorization'] = `Bearer ${activeKey}`;
+    // Hanya kirim Authorization header jika pengguna mengirimkan key miliknya sendiri (BYOP).
+    // Jika tidak ada clientKey, panggil API tanpa key agar model PRO tetap dikembalikan di daftar model.
+    if (clientKey) {
+      headers['Authorization'] = `Bearer ${clientKey}`;
     }
 
     const apiUrl = 'https://gen.pollinations.ai/models';
