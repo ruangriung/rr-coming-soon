@@ -30,7 +30,7 @@ export default function DataDeletion() {
           <div className="mt-16 space-y-12">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg text-white/60 leading-relaxed font-medium">
-                Sesuai dengan regulasi perlindungan data, Anda memiliki hak untuk meminta penghapusan permanen seluruh data Anda dari sistem RuangRiung AI.
+                Sesuai dengan regulasi perlindungan data, Anda memiliki hak untuk meminta penghapusan permanen seluruh data Anda dari sistem RuangRiung AI Generator.
               </p>
             </div>
 

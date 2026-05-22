@@ -7,7 +7,7 @@ export default function TermsOfService() {
     {
       title: "Penggunaan Layanan",
       icon: <CheckCircle size={20} />,
-      content: "Anda setuju untuk menggunakan RuangRiung AI hanya untuk tujuan legal dan sesuai dengan hukum yang berlaku di Indonesia."
+      content: "Anda setuju untuk menggunakan RuangRiung AI Generator hanya untuk tujuan legal dan sesuai dengan hukum yang berlaku di Indonesia."
     },
     {
       title: "Konten Pengguna",
@@ -49,7 +49,7 @@ export default function TermsOfService() {
 
           <div className="mt-16 space-y-12">
             <p className="text-lg text-white/60 leading-relaxed font-medium">
-              Dengan mengakses RuangRiung AI Studio, Anda setuju untuk terikat oleh syarat dan ketentuan berikut. Harap baca dengan saksama sebelum menggunakan alat kami.
+              Dengan mengakses RuangRiung AI Generator, Anda setuju untuk terikat oleh syarat dan ketentuan berikut. Harap baca dengan saksama sebelum menggunakan alat kami.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -67,7 +67,7 @@ export default function TermsOfService() {
             <div className="p-8 bg-black/40 border border-white/10 rounded-3xl">
               <h3 className="text-sm font-black text-white uppercase tracking-widest mb-4">Pernyataan Penyangkalan</h3>
               <p className="text-white/40 text-sm font-medium leading-relaxed italic">
-                Layanan ini disediakan "apa adanya". RuangRiung AI tidak memberikan jaminan bahwa hasil AI akan selalu akurat atau sesuai dengan ekspektasi Anda sepenuhnya.
+                Layanan ini disediakan "apa adanya". RuangRiung AI Generator tidak memberikan jaminan bahwa hasil AI akan selalu akurat atau sesuai dengan ekspektasi Anda sepenuhnya.
               </p>
             </div>
           </div>

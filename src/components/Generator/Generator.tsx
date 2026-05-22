@@ -52,7 +52,7 @@ export default function Generator() {
             <span className="text-[10px] font-black text-orange-600 dark:text-orange-500 uppercase tracking-widest italic">All-in-One AI Platform</span>
           </div>
           <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-none">
-            <span className="text-orange-500"> RuangRiung </span> AI Studio
+            <span className="text-orange-500"> RuangRiung AI </span> Generator
           </h2>
           <p className="text-slate-500 dark:text-white/30 font-bold text-xs uppercase tracking-[0.3em]">
             Ekosistem Kecerdasan Buatan Terpadu oleh RuangRiung.

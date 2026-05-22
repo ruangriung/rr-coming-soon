@@ -47,7 +47,7 @@ export default function LandingPage() {
           className="flex flex-col"
         >
           <div className="text-[9px] tracking-[0.2em] uppercase text-slate-400 dark:text-[#666] mb-0.5 font-medium">
-            RuangRiung AI Studio
+            RuangRiung AI Generator
           </div>
           <h1 className="text-lg md:text-xl font-light tracking-tight text-slate-900 dark:text-white">
             ruangriung<span className="text-slate-400 dark:text-[#666]">.my.id</span>
@@ -74,7 +74,7 @@ export default function LandingPage() {
           </motion.div>
           
           <motion.h2 variants={itemVariants} className="text-[50px] md:text-[80px] leading-[1.05] font-light tracking-tight text-slate-900 dark:text-white mb-6">
-            Ekosistem AI <br className="hidden md:block" />
+            RuangRiung AI Generator <br className="hidden md:block" />
             <span className="text-slate-400 dark:text-[#666] font-serif italic font-normal tracking-normal text-[55px] md:text-[85px]">Untuk kreator.</span>
           </motion.h2>
           
@@ -298,7 +298,7 @@ export default function LandingPage() {
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           
           <div className="flex flex-col gap-2">
-            <span className="text-[10px] font-medium tracking-widest text-slate-400 dark:text-[#666] uppercase">RuangRiung Studio</span>
+            <span className="text-[10px] font-medium tracking-widest text-slate-400 dark:text-[#666] uppercase">RuangRiung AI Generator</span>
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
               <span className="text-xs text-slate-500 dark:text-[#888]">Semua sistem berjalan normal</span>
@@ -313,7 +313,7 @@ export default function LandingPage() {
           </div>
 
           <div className="text-[11px] text-slate-400 dark:text-[#444] font-medium">
-            &copy; {year} RuangRiung.
+            &copy; {year} RuangRiung AI Generator.
           </div>
         </div>
       </footer>

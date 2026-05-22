@@ -54,7 +54,7 @@ export default function GeneratorPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
             <span className="font-black text-xl italic text-slate-900 dark:text-white">RR<span className="text-orange-500">.</span></span>
-            <span className="text-[10px] font-bold text-slate-400 dark:text-white/20 uppercase tracking-[0.2em]">© 2026 RuangRiung AI</span>
+            <span className="text-[10px] font-bold text-slate-400 dark:text-white/20 uppercase tracking-[0.2em]">© 2026 RuangRiung AI Generator</span>
           </div>
           <div className="flex flex-wrap justify-center gap-6 md:gap-12">
             <Link to="/artikel" className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">Blog</Link>

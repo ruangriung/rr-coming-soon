@@ -52,7 +52,7 @@ export default function PrivacyPolicy() {
 
           <div className="mt-16 space-y-12">
             <p className="text-lg text-white/60 leading-relaxed font-medium">
-              Di RuangRiung AI, privasi Anda adalah prioritas utama kami. Dokumen ini menjelaskan bagaimana kami mengelola informasi Anda saat Anda menggunakan Studio AI Multimedia kami.
+              Di RuangRiung AI Generator, privasi Anda adalah prioritas utama kami. Dokumen ini menjelaskan bagaimana kami mengelola informasi Anda saat Anda menggunakan Studio Generator kami.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
