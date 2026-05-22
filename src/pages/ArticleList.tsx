@@ -49,7 +49,7 @@ export default function ArticleList() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-24 pt-12 px-4 transition-colors duration-500">
+    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] pb-24 pt-12 px-4 transition-colors duration-500 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Navigation */}
         <div className="mb-12 flex items-center justify-start">
@@ -154,20 +154,20 @@ export default function ArticleList() {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="mt-20 flex justify-center items-center gap-3">
+                  <div className="mt-20 flex flex-col sm:flex-row justify-center items-center gap-3 w-full">
                     <button
                       disabled={currentPage === 1}
                       onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                      className="px-6 py-3 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 disabled:opacity-20 transition-all"
+                      className="w-full sm:w-auto px-5 py-3 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 disabled:opacity-20 transition-all"
                     >
-                      Sebelumnya
+                      ← Sebelumnya
                     </button>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap justify-center gap-2 max-w-full">
                       {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                         <button
                           key={page}
                           onClick={() => setCurrentPage(page)}
-                          className={`w-12 h-12 rounded-2xl text-[10px] font-black transition-all border ${
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl text-[10px] font-black transition-all border ${
                             currentPage === page 
                               ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20' 
                               : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/30 shadow-sm dark:shadow-none'
@@ -180,9 +180,9 @@ export default function ArticleList() {
                     <button
                       disabled={currentPage === totalPages}
                       onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                      className="px-6 py-3 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 disabled:opacity-20 transition-all"
+                      className="w-full sm:w-auto px-5 py-3 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 disabled:opacity-20 transition-all"
                     >
-                      Berikutnya
+                      Berikutnya →
                     </button>
                   </div>
                 )}

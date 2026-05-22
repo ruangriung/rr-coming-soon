@@ -68,10 +68,10 @@ export default function HamburgerMenu() {
       {/* Floating Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-4 right-4 md:top-6 md:right-8 z-[9999] w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl cursor-pointer hover:scale-105 active:scale-95 transition-all text-slate-700 dark:text-white/80 hover:text-slate-900 dark:hover:text-white ${
+        className={`fixed top-4 right-4 md:top-6 md:right-8 z-[9999] w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl cursor-pointer hover:scale-105 active:scale-95 transition-all ${
           isOpen
-            ? 'bg-transparent border-transparent shadow-none'
-            : 'bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-lg shadow-slate-900/5 dark:shadow-black/20'
+            ? 'bg-transparent border-transparent shadow-none text-slate-700 dark:text-white/80'
+            : 'bg-white dark:bg-[#111] backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xl shadow-slate-900/15 dark:shadow-black/40 text-slate-800 dark:text-white/80 hover:text-orange-500 dark:hover:text-orange-500 hover:border-orange-500/40'
         }`}
         aria-label="Toggle Menu"
       >
