@@ -10,7 +10,7 @@ export default function GeneratorPage() {
   return (
     <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] text-slate-900 dark:text-white selection:bg-orange-500/30 transition-colors duration-500">
       {/* Navigation Header */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] pl-4 pr-16 md:pl-6 md:pr-22 py-4 md:py-6 flex justify-between items-center bg-[#fcfcfc]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-[100] pl-4 pr-16 md:pl-6 md:pr-22 py-4 md:py-6 flex justify-between items-center bg-[#fcfcfc]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md transform-gpu border-b border-slate-200 dark:border-white/10">
         <Link 
           to="/" 
           className="group inline-flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-medium tracking-wide text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:border-orange-500/50 transition-all cursor-pointer"

@@ -82,7 +82,7 @@ export default function BYOPHandler({ onKeyChange }: { onKeyChange?: () => void 
       </button>
 
       {/* Tooltip */}
-      <div className="absolute bottom-full left-0 mb-4 w-72 p-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-3xl shadow-2xl opacity-0 invisible group-hover/byop:opacity-100 group-hover/byop:visible transition-all duration-300 z-[110] border border-slate-200 dark:border-white/10 backdrop-blur-xl">
+      <div className="absolute bottom-full left-0 mb-4 w-72 p-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-3xl shadow-2xl opacity-0 invisible group-hover/byop:opacity-100 group-hover/byop:visible transition-all duration-300 z-[110] border border-slate-200 dark:border-white/10 transform-gpu">
         <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500 mb-3 flex items-center gap-2">
           <Key size={12} /> Kenapa Hubungkan Akun?
         </h4>

@@ -17,11 +17,12 @@ const INITIAL_SETTINGS: GeneratorSettings = {
   seed: -1,
   artStyle: 'none',
   batchSize: 1,
-  imageQuality: 'Standar',
+  imageQuality: 'hd',
   private: false,
   safe: true,
   transparent: false,
   nologo: true,
+  enhance: true,
   inputImages: [],
 };
 
@@ -198,7 +199,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           ...rest,
           prompt: settings.prompt,
           seed: currentSeed + i,
-          image: inputImages && inputImages[0] ? inputImages[0] : undefined
+          image: inputImages && inputImages.length > 0 ? inputImages : undefined
         };
 
         let response = await fetch('/api/pollinations/image', {

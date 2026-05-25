@@ -32,7 +32,7 @@ export async function onRequest(context: any) {
 
     const pollParams = new URLSearchParams();
     const supportedParams = [
-      'model', 'width', 'height', 'seed', 'enhance', 'nologo',
+      'model', 'width', 'height', 'seed', 'enhance', 'nologo', 'private',
       'negative_prompt', 'safe', 'quality', 'transparent',
       'image', 'duration', 'aspectRatio', 'audio', 't'
     ];
@@ -41,11 +41,16 @@ export async function onRequest(context: any) {
     if (params.negativePrompt && !params.negative_prompt) {
       params.negative_prompt = params.negativePrompt;
     }
+    if (params.imageQuality && !params.quality) {
+      params.quality = params.imageQuality;
+    }
 
     Object.keys(params).forEach(key => {
       if (supportedParams.includes(key) && params[key] !== 'undefined' && params[key] !== null) {
         if (key === 'model') {
           pollParams.set(key, params[key].toString().toLowerCase());
+        } else if (Array.isArray(params[key])) {
+          params[key].forEach((item: any) => pollParams.append(key, item.toString()));
         } else {
           pollParams.set(key, params[key].toString());
         }

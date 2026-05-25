@@ -22,6 +22,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const login = () => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const mockUser: UserProfile = {
+        id: 'local-dev-123',
+        name: 'Developer Ndeso',
+        email: 'dev@localhost',
+        picture: 'https://ui-avatars.com/api/?name=Developer+Ndeso&background=f97316&color=fff'
+      };
+      localStorage.setItem('rr_user', JSON.stringify(mockUser));
+      setUser(mockUser);
+      toast.success('Login simulasi lokal berhasil!');
+      return;
+    }
     window.location.href = '/api/auth/login';
   };
 

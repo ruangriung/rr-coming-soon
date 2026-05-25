@@ -30,7 +30,7 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
     setAspectRatio('Custom');
   }, [setSettings]);
 
-  const handleImageQualityChange = useCallback((quality: 'Standar' | 'HD' | 'Ultra') => {
+  const handleImageQualityChange = useCallback((quality: 'low' | 'medium' | 'high' | 'hd') => {
     setSettings(prev => ({ ...prev, imageQuality: quality }));
   }, [setSettings]);
 

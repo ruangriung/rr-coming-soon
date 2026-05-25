@@ -22,7 +22,11 @@ export async function onRequest(context: any) {
         const pollParams = new URLSearchParams();
         Object.entries(params).forEach(([key, value]) => {
             if (value !== undefined && value !== null) {
-                pollParams.set(key, String(value));
+                if (Array.isArray(value)) {
+                    value.forEach(item => pollParams.append(key, String(item)));
+                } else {
+                    pollParams.set(key, String(value));
+                }
             }
         });
         

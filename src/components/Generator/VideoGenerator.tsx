@@ -4,10 +4,11 @@ import toast from 'react-hot-toast';
 
 export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequired?: () => void }) {
     const [prompt, setPrompt] = useState('');
-    const [negativePrompt, setNegativePrompt] = useState('');
     const [seed, setSeed] = useState('-1');
     const [aspectRatio, setAspectRatio] = useState('16:9');
     const [model, setModel] = useState('veo');
+    const [audio, setAudio] = useState(false);
+    const [duration, setDuration] = useState<number | ''>('');
     const [models, setModels] = useState<{id: string; name: string; isPro: boolean; description?: string; cost?: string}[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isEnhancing, setIsEnhancing] = useState(false);
@@ -118,11 +119,12 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
         const config = {
             model,
             prompt,
-            negative_prompt: negativePrompt,
             seed: seed === '-1' ? 'random' : parseInt(seed),
             aspect_ratio: aspectRatio,
-            width: aspectRatio === '16:9' ? 1280 : (aspectRatio === '1:1' ? 1024 : 720),
-            height: aspectRatio === '16:9' ? 720 : (aspectRatio === '1:1' ? 1024 : 1280),
+            width: aspectRatio === '16:9' ? 1280 : 720,
+            height: aspectRatio === '16:9' ? 720 : 1280,
+            audio: audio,
+            ...(duration !== '' ? { duration } : {}),
             platform: 'RuangRiung AI Studio',
             engine: 'Pollinations.ai'
         };
@@ -142,7 +144,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
         
         try {
             const [wRatio, hRatio] = aspectRatio.split(':').map(Number);
-            const width = wRatio > hRatio ? 1280 : (wRatio === hRatio ? 1024 : 720);
+            const width = wRatio > hRatio ? 1280 : 720;
             const height = Math.round(width * (hRatio / wRatio));
 
             let response = await fetch('/api/pollinations/video', {
@@ -154,10 +156,11 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                 body: JSON.stringify({
                     model,
                     prompt,
-                    negative_prompt: negativePrompt,
                     seed: seed === '-1' ? Math.floor(Math.random() * 1000000) : parseInt(seed),
                     width,
-                    height
+                    height,
+                    audio: audio,
+                    ...(duration !== '' ? { duration } : {})
                 })
             });
 
@@ -167,11 +170,12 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                 const activeKey = localStorage.getItem('pollinations_api_key');
                 const pollParams = new URLSearchParams({
                     model,
-                    negative_prompt: negativePrompt,
                     seed: (seed === '-1' ? Math.floor(Math.random() * 1000000) : parseInt(seed)).toString(),
                     width: width.toString(),
                     height: height.toString()
                 });
+                if (audio) pollParams.set('audio', 'true');
+                if (duration !== '') pollParams.set('duration', duration.toString());
                 if (activeKey) pollParams.set('key', activeKey);
                 
                 const directUrl = `https://gen.pollinations.ai/video/${encodeURIComponent(prompt)}?${pollParams.toString()}`;
@@ -213,10 +217,10 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
     if (!isLoggedIn) {
         return (
             <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
-                <div className="p-8 md:p-12 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col items-center text-center gap-6 max-w-2xl mx-auto backdrop-blur-xl">
+                <div className="p-8 md:p-12 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col items-center text-center gap-6 max-w-2xl mx-auto transform-gpu">
                     {/* Glowing background highlights */}
-                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px]" />
-                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px]" />
+                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px] pointer-events-none transform-gpu" />
+                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px] pointer-events-none transform-gpu" />
 
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20 shadow-sm animate-pulse">
@@ -398,7 +402,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                         />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="space-y-2">
                             <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Aspek Rasio</label>
                             <select 
@@ -408,8 +412,32 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                             >
                                 <option value="16:9" className="bg-white dark:bg-black text-slate-900 dark:text-white">16:9 Landscape</option>
                                 <option value="9:16" className="bg-white dark:bg-black text-slate-900 dark:text-white">9:16 Portrait</option>
-                                <option value="1:1" className="bg-white dark:bg-black text-slate-900 dark:text-white">1:1 Square</option>
                             </select>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Durasi (s)</label>
+                            <input 
+                                type="number" 
+                                value={duration}
+                                onChange={(e) => setDuration(e.target.value ? Number(e.target.value) : '')}
+                                placeholder="Auto"
+                                min={1}
+                                max={120}
+                                className="w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-[10px] font-black outline-none placeholder:text-slate-400/50"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Audio</label>
+                            <button
+                                onClick={() => setAudio(!audio)}
+                                className={`w-full p-3 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all ${
+                                    audio 
+                                    ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20' 
+                                    : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400 dark:text-white/40 hover:border-slate-300 dark:hover:border-white/20'
+                                }`}
+                            >
+                                {audio ? 'ON' : 'OFF'}
+                            </button>
                         </div>
                         <div className="space-y-2">
                             <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Seed</label>
@@ -417,7 +445,9 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                                 type="number" 
                                 value={seed}
                                 onChange={(e) => setSeed(e.target.value)}
-                                className="w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-[10px] font-black outline-none"
+                                disabled={!['nova-real'].includes(model.toLowerCase())}
+                                title={!['nova-real'].includes(model.toLowerCase()) ? "Hanya didukung oleh model nova-real" : ""}
+                                className={`w-full p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-[10px] font-black outline-none ${!['nova-real'].includes(model.toLowerCase()) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             />
                         </div>
                     </div>
