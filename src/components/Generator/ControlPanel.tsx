@@ -105,6 +105,11 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
             placeholder="Deskripsikan gambar yang ingin Anda buat... (Tekan Ctrl + Enter untuk Generate)"
             className="w-full h-40 p-5 bg-slate-50 dark:bg-white/[0.02] rounded-3xl border-2 border-slate-200 dark:border-white/10 focus:border-orange-500/50 transition-all text-slate-900 dark:text-white font-medium resize-none outline-none placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner leading-relaxed"
           />
+          <div className="flex justify-end px-2 mt-2">
+            <span className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-wider">
+              {(settings.prompt || '').length} karakter
+            </span>
+          </div>
         </div>
 
         <AdvancedSettings
