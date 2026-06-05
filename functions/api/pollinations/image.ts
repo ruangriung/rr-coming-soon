@@ -56,6 +56,14 @@ export async function onRequest(context: any) {
     // Map frontend camelCase to API snake_case
     const payload: any = { prompt };
     
+    // Workaround for Pollinations POST endpoint ignoring the 'seed' parameter in JSON
+    // We append the seed (or a random number) directly to the prompt string to bypass caching
+    if (params.seed !== undefined && params.seed !== -1 && params.seed !== '-1') {
+      payload.prompt = `${prompt} --seed ${params.seed}`;
+    } else {
+      payload.prompt = `${prompt} --seed ${Math.floor(Math.random() * 10000000)}`;
+    }
+    
     if (params.negativePrompt || params.negative_prompt) {
       payload.negative_prompt = params.negative_prompt || params.negativePrompt;
     }
