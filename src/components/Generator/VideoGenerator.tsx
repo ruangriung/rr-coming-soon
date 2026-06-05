@@ -309,7 +309,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
 
     return (
         <div className="w-full max-w-7xl mx-auto space-y-8 animate-in fade-in duration-700">
-            {isLoggedIn && <GeneratorNotice />}
+            <GeneratorNotice />
             <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12">
                 <div className="w-full lg:w-[45%] flex-shrink-0 space-y-6">
                     <div className="space-y-4">
@@ -478,7 +478,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                     </button>
                 </div>
 
-                <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center justify-center space-y-6 sticky top-24 pt-4 lg:pt-0">
+                <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center justify-center space-y-6 lg:sticky lg:top-24 pt-4 lg:pt-0">
                     <div className="w-full aspect-video rounded-3xl bg-slate-50 dark:bg-white/5 border-2 border-dashed border-slate-200 dark:border-white/10 flex items-center justify-center overflow-hidden relative group shadow-xl shadow-slate-200/50 dark:shadow-none">
                         {videoUrl ? (
                             <video src={videoUrl} controls autoPlay loop className="w-full h-full object-contain" />

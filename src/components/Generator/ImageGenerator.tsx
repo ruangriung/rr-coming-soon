@@ -275,7 +275,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   return (
     <div className="w-full space-y-12 animate-in fade-in duration-700">
-      {isLoggedIn && <GeneratorNotice />}
+      <GeneratorNotice />
       <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12 max-w-7xl mx-auto">
         <div className="w-full lg:w-[45%] flex-shrink-0">
             <ControlPanel 
@@ -289,7 +289,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
               models={modelList}
             />
         </div>
-        <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center gap-6 sticky top-24 pt-4 lg:pt-0">
+        <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center gap-6 lg:sticky lg:top-24 pt-4 lg:pt-0 z-10">
            <ImageDisplay 
              isLoading={isLoading} 
              imageUrls={imageUrls} 
