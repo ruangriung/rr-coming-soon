@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ControlPanel from './ControlPanel.tsx';
 import ImageDisplay from './ImageDisplay.tsx';
 import ImageModal from './ImageModal.tsx';
+import GeneratorNotice from './GeneratorNotice.tsx';
 import { GeneratorSettings } from './AdvancedSettings.tsx';
 import { History, Download, Maximize2, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -274,6 +275,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   return (
     <div className="w-full space-y-12 animate-in fade-in duration-700">
+      {isLoggedIn && <GeneratorNotice />}
       <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12 max-w-7xl mx-auto">
         <div className="w-full lg:w-[45%] flex-shrink-0">
             <ControlPanel 

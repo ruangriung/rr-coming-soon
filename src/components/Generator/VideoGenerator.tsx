@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Video, Sparkles, Download, Wand2, Plus, AlertCircle, RefreshCw, X, Lock, Key, ArrowRight, Zap, ShieldCheck } from 'lucide-react';
+import GeneratorNotice from './GeneratorNotice.tsx';
 import toast from 'react-hot-toast';
 
 export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequired?: () => void }) {
@@ -308,6 +309,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
 
     return (
         <div className="w-full max-w-7xl mx-auto space-y-8 animate-in fade-in duration-700">
+            {isLoggedIn && <GeneratorNotice />}
             <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12">
                 <div className="w-full lg:w-[45%] flex-shrink-0 space-y-6">
                     <div className="space-y-4">
