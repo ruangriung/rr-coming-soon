@@ -22,7 +22,7 @@ export default function PaymentRequiredModal({ isOpen, onClose }: PaymentRequire
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center px-4">
           {/* Backdrop */}
           <motion.div 
             initial={{ opacity: 0 }}
@@ -39,9 +39,7 @@ export default function PaymentRequiredModal({ isOpen, onClose }: PaymentRequire
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="relative w-full max-w-lg bg-[#0d0d0d] border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden"
           >
-            {/* Background Glow */}
-            <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/20 blur-[100px] pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 blur-[100px] pointer-events-none" />
+            {/* Background Glow removed */}
 
             {/* Close Button */}
             <button 

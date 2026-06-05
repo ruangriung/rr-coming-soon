@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState, useEffect, useRef } from 'react';
-import { ImageIcon, X, Info, Crown, ChevronDown } from 'lucide-react';
+import { ImageIcon, X, Info, Crown, ChevronDown, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'motion/react';
 import ConnectProModal from './ConnectProModal.tsx';
@@ -33,9 +33,11 @@ interface AdvancedSettingsProps {
   onImageQualityChange: (quality: 'low' | 'medium' | 'high' | 'hd') => void;
   className?: string;
   onModelSelect: (model: string) => void;
+  onRefreshModels: () => void;
+  isRefreshingModels: boolean;
 }
 
-const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onAspectRatioChange, onManualDimensionChange, onImageQualityChange, className, onModelSelect }: AdvancedSettingsProps) => {
+const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onAspectRatioChange, onManualDimensionChange, onImageQualityChange, className, onModelSelect, onRefreshModels, isRefreshingModels }: AdvancedSettingsProps) => {
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [selectedProModel, setSelectedProModel] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -128,7 +130,18 @@ const AdvancedSettings = memo(({ settings, setSettings, models, aspectRatio, onA
         </div>
 
         <div ref={dropdownRef}>
-          <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest mb-2">Pilih Mesin AI</label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Pilih Mesin AI</label>
+            <button 
+              type="button"
+              onClick={onRefreshModels}
+              disabled={isRefreshingModels}
+              className="text-[9px] font-black text-slate-400 dark:text-white/20 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest flex items-center gap-1.5 transition-all cursor-pointer disabled:opacity-50"
+              title="Segarkan daftar model"
+            >
+              <RefreshCw size={10} className={isRefreshingModels ? 'animate-spin text-orange-500' : ''} /> Segarkan
+            </button>
+          </div>
           <div className="relative">
             <button
               type="button"

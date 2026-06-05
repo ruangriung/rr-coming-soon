@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, useCallback, memo, useEffect } from 'react';
 import { Wand2, RefreshCw, X, Sparkles, AlertCircle } from 'lucide-react';
 import AdvancedSettings, { GeneratorSettings } from './AdvancedSettings.tsx';
 import ButtonSpinner from './ButtonSpinner.tsx';
@@ -13,10 +13,33 @@ interface ControlPanelProps {
   onEnhancePrompt: () => void;
   onCopyJson: () => void;
   models: {id: string; name: string; isPro: boolean; description?: string}[];
+  onRefreshModels: () => void;
+  isRefreshingModels: boolean;
 }
 
-const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnhancing, onEnhancePrompt, onCopyJson, models }: ControlPanelProps) => {
+const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnhancing, onEnhancePrompt, onCopyJson, models, onRefreshModels, isRefreshingModels }: ControlPanelProps) => {
   const [aspectRatio, setAspectRatio] = useState<'Kotak' | 'Portrait' | 'Lansekap' | 'Custom'>('Kotak');
+  const [loadingTextIndex, setLoadingTextIndex] = useState(0);
+
+  const loadingMessages = [
+    'Menganalisis prompt...',
+    'Memproses model AI...',
+    'Merender pixel...',
+    'Menyempurnakan detail...',
+    'Hampir selesai...'
+  ];
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (isLoading) {
+      interval = setInterval(() => {
+        setLoadingTextIndex(prev => (prev + 1) % loadingMessages.length);
+      }, 2000);
+    } else {
+      setLoadingTextIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   const handleAspectRatioChange = useCallback((preset: 'Kotak' | 'Portrait' | 'Lansekap') => {
     setAspectRatio(preset);
@@ -38,9 +61,9 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
     <div className="w-full max-w-4xl space-y-6">
       <div className="glass-card p-6 space-y-4">
         <div className="space-y-2">
-          <div className="flex items-center justify-between px-1">
-             <label className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.2em]">Prompt Visual</label>
-             <div className="flex gap-2">
+          <div className="flex flex-wrap items-center justify-between px-1 gap-y-3">
+             <label className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.2em] shrink-0 w-full sm:w-auto">Prompt Visual</label>
+             <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                 <button 
                   onClick={onEnhancePrompt}
                   disabled={isEnhancing || !settings.prompt.trim()}
@@ -72,7 +95,14 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
           <textarea
             value={settings.prompt}
             onChange={(e) => setSettings(prev => ({ ...prev, prompt: e.target.value }))}
-            placeholder="Deskripsikan gambar yang ingin Anda buat..."
+            onKeyDown={(e) => {
+              if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                if (!isLoading && settings.prompt.trim()) {
+                  onGenerate();
+                }
+              }
+            }}
+            placeholder="Deskripsikan gambar yang ingin Anda buat... (Tekan Ctrl + Enter untuk Generate)"
             className="w-full h-40 p-5 bg-slate-50 dark:bg-white/[0.02] rounded-3xl border-2 border-slate-200 dark:border-white/10 focus:border-orange-500/50 transition-all text-slate-900 dark:text-white font-medium resize-none outline-none placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner leading-relaxed"
           />
         </div>
@@ -86,6 +116,8 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
           onManualDimensionChange={handleManualDimensionChange}
           onImageQualityChange={handleImageQualityChange}
           onModelSelect={(model) => setSettings(prev => ({ ...prev, model }))}
+          onRefreshModels={onRefreshModels}
+          isRefreshingModels={isRefreshingModels}
         />
 
         <button
@@ -94,7 +126,7 @@ const ControlPanel = memo(({ settings, setSettings, onGenerate, isLoading, isEnh
           className="w-full py-4 bg-orange-500 hover:bg-orange-600 disabled:bg-slate-200 dark:disabled:bg-white/10 disabled:text-slate-400 dark:disabled:text-white/20 text-white font-black uppercase tracking-[0.2em] rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-500/20 active:scale-[0.98] cursor-pointer"
         >
           {isLoading ? <ButtonSpinner /> : <Sparkles size={20} />}
-          {isLoading ? 'Sedang Memproses...' : 'Generate Visual'}
+          {isLoading ? loadingMessages[loadingTextIndex] : 'Generate Visual'}
         </button>
       </div>
     </div>

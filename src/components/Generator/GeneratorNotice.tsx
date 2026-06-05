@@ -25,11 +25,8 @@ export default function GeneratorNotice() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="bg-white dark:bg-[#121212] rounded-[2rem] p-6 md:p-8 max-w-md w-full shadow-2xl relative animate-in zoom-in-95 duration-300 border border-slate-200 dark:border-white/10 text-center flex flex-col items-center">
-        
-        {/* Glow effect */}
-        <div className="absolute -top-12 -left-12 w-48 h-48 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none" />
-        
+      <div className="bg-white dark:bg-[#121212] rounded-[2rem] p-6 md:p-8 max-w-md w-full shadow-2xl relative animate-in zoom-in-95 duration-300 border border-slate-200 dark:border-white/10 text-center flex flex-col items-center overflow-hidden">
+        {/* Glow effect removed as requested */}        
         <div className="w-16 h-16 rounded-[1.5rem] bg-orange-500/10 text-orange-500 flex items-center justify-center mb-6 border border-orange-500/20 shadow-inner">
           <AlertCircle size={32} />
         </div>

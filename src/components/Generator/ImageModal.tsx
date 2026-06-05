@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZoomOut, Download } from 'lucide-react';
+import { X, Download } from 'lucide-react';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -12,23 +12,24 @@ export default function ImageModal({ isOpen, imageUrl, onClose }: ImageModalProp
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-300 cursor-pointer"
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-300 cursor-pointer"
       onClick={onClose}
     >
-      <div className="absolute top-6 right-6 flex gap-4">
+      <div className="absolute top-6 right-6 flex gap-4 z-50">
         <a 
           href={imageUrl} 
           download={`rr-ai-${Date.now()}.png`}
           onClick={(e) => e.stopPropagation()}
-          className="p-3 bg-white/10 dark:bg-white/10 hover:bg-orange-500 text-white rounded-full transition-all border border-white/20 shadow-xl cursor-pointer"
+          className="p-3 bg-black/60 hover:bg-orange-500 text-white rounded-full transition-all border border-white/20 shadow-xl cursor-pointer"
         >
           <Download size={20} />
         </a>
         <button 
           onClick={onClose}
-          className="p-3 bg-white/10 dark:bg-white/10 hover:bg-red-500 text-white rounded-full transition-all border border-white/20 shadow-xl cursor-pointer"
+          className="p-3 bg-black/60 hover:bg-red-500 text-white rounded-full transition-all border border-white/20 shadow-xl cursor-pointer"
+          title="Tutup Preview"
         >
-          <ZoomOut size={20} />
+          <X size={20} />
         </button>
       </div>
 

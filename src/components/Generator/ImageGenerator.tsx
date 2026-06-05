@@ -42,6 +42,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   const [isLoading, setIsLoading] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
+  const [isRefreshingModels, setIsRefreshingModels] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [modelList, setModelList] = useState<{id: string; name: string; isPro: boolean}[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -53,7 +54,8 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
   const fetchHistory = async () => {
     try {
       const items = await getHistory();
-      setHistory(items.filter(i => i.type === 'image'));
+      const imageItems = items.filter(i => i.type === 'image').slice(0, 30);
+      setHistory(imageItems);
     } catch (err) {
       console.error('Failed to fetch history', err);
       setHistory([]);
@@ -122,6 +124,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
   }, [settings]);
 
   const fetchModels = async () => {
+    setIsRefreshingModels(true);
     try {
       let response = await fetch('/api/pollinations/models/image', {
         headers: {
@@ -174,6 +177,8 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
       }
     } catch (err) {
       console.error("Gagal memuat model:", err);
+    } finally {
+      setIsRefreshingModels(false);
     }
   };
 
@@ -287,6 +292,8 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
               onEnhancePrompt={handleEnhancePrompt}
               onCopyJson={handleCopyJson}
               models={modelList}
+              onRefreshModels={fetchModels}
+              isRefreshingModels={isRefreshingModels}
             />
         </div>
         <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center gap-6 lg:sticky lg:top-24 pt-4 lg:pt-0 z-10">
@@ -307,12 +314,6 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
             </div>
             <div className="flex items-center gap-6">
               <button 
-                onClick={fetchModels}
-                className="text-[10px] font-black text-slate-400 dark:text-white/20 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest flex items-center gap-2 transition-all cursor-pointer"
-              >
-                <RefreshCw size={12} /> Segarkan Model
-              </button>
-              <button 
                 onClick={async () => {
                   if (confirm('Hapus semua riwayat gambar?')) {
                     await clearHistory();
@@ -328,13 +329,18 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {history.map((item) => (
-              <div key={item.id} className="group relative aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-orange-500/50 transition-all cursor-pointer shadow-lg shadow-slate-200/50 dark:shadow-none">
-                <img src={historyUrls[item.id]} alt={item.prompt} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 gap-3">
+              <div 
+                key={item.id} 
+                onClick={() => setSelectedImage(historyUrls[item.id])}
+                className="group relative aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-orange-500/50 transition-all cursor-pointer shadow-lg shadow-slate-200/50 dark:shadow-none"
+              >
+                <img src={historyUrls[item.id]} alt={item.prompt} loading="lazy" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 gap-3">
                   <p className="text-[10px] text-white/80 font-medium line-clamp-2 leading-relaxed">{item.prompt}</p>
                   <div className="flex gap-2">
                     <button 
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setSettings(prev => ({ 
                           ...prev, 
                           prompt: item.prompt || '', 
@@ -347,8 +353,12 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
                       Reuse
                     </button>
                     <button 
-                      onClick={() => setSelectedImage(historyUrls[item.id])}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage(historyUrls[item.id]);
+                      }}
                       className="p-2 bg-orange-500 hover:bg-orange-600 rounded-xl text-white transition-all cursor-pointer"
+                      title="Perbesar Gambar"
                     >
                       <Maximize2 size={14} />
                     </button>

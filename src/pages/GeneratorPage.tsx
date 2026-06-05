@@ -8,7 +8,7 @@ export default function GeneratorPage() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] text-slate-900 dark:text-white selection:bg-orange-500/30 transition-colors duration-500">
+    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] text-slate-900 dark:text-white selection:bg-orange-500/30 transition-colors duration-500 overflow-x-hidden w-full">
       {/* Navigation Header */}
       <nav className="fixed top-0 left-0 right-0 z-[100] pl-4 pr-16 md:pl-6 md:pr-22 py-4 md:py-6 flex justify-between items-center bg-[#fcfcfc]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md transform-gpu border-b border-slate-200 dark:border-white/10">
         <Link 
@@ -50,19 +50,19 @@ export default function GeneratorPage() {
         <Generator />
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-white/5 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
+      <footer className="border-t border-slate-200 dark:border-white/5 py-12 px-4 sm:px-6 w-full max-w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <span className="font-black text-xl italic text-slate-900 dark:text-white">RR<span className="text-orange-500">.</span></span>
-            <span className="text-[10px] font-bold text-slate-400 dark:text-white/20 uppercase tracking-[0.2em]">© 2026 RuangRiung AI Generator</span>
+            <span className="text-[9px] sm:text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-[0.1em] sm:tracking-[0.2em] max-w-[250px] sm:max-w-none break-words">© 2026 RuangRiung AI Generator</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12">
-            <Link to="/artikel" className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">Blog</Link>
-            <Link to="/kumpulan-prompt" className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">Prompts</Link>
-            <Link to="/tentang-kami" className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">About</Link>
-            <Link to="/kebijakan-privasi" className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Privacy</Link>
-            <Link to="/ketentuan-layanan" className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Terms</Link>
-            <Link to="/kontak" className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Contact</Link>
+          <div className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-3 sm:gap-6 md:gap-8 max-w-full">
+            <Link to="/artikel" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">Blog</Link>
+            <Link to="/kumpulan-prompt" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">Prompts</Link>
+            <Link to="/tentang-kami" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-orange-500 transition-colors">About</Link>
+            <Link to="/kebijakan-privasi" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Privacy</Link>
+            <Link to="/ketentuan-layanan" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Terms</Link>
+            <Link to="/kontak" className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 hover:text-orange-500 transition-colors">Contact</Link>
           </div>
         </div>
       </footer>

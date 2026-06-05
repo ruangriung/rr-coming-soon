@@ -225,9 +225,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
         return (
             <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
                 <div className="p-8 md:p-12 bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col items-center text-center gap-6 max-w-2xl mx-auto transform-gpu">
-                    {/* Glowing background highlights */}
-                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px] pointer-events-none transform-gpu" />
-                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[80px] pointer-events-none transform-gpu" />
+                    {/* Glowing background highlights removed */}
 
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20 shadow-sm animate-pulse">

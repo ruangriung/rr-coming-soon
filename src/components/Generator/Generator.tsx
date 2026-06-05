@@ -51,7 +51,7 @@ export default function Generator() {
             <LayoutGrid size={12} className="text-orange-500" />
             <span className="text-[10px] font-black text-orange-600 dark:text-orange-500 uppercase tracking-widest italic">All-in-One AI Platform</span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-none">
+          <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-none break-words">
             <span className="text-orange-500"> RuangRiung AI </span> Generator
           </h2>
           <p className="text-slate-500 dark:text-white/30 font-bold text-xs uppercase tracking-[0.3em]">
@@ -103,21 +103,21 @@ export default function Generator() {
       />
 
       {/* Footer Info */}
-      <div className="text-center pt-24 pb-12 opacity-80 dark:opacity-70">
-        <div className="flex items-center justify-center gap-4 mb-5">
-          <div className="h-[1px] w-12 bg-slate-300 dark:bg-white/20" />
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] italic text-slate-700 dark:text-white/90">
+      <div className="text-center pt-24 pb-12 opacity-90 dark:opacity-100 w-full max-w-full overflow-hidden px-4">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 mb-5">
+          <div className="h-[1px] w-8 sm:w-12 bg-slate-300 dark:bg-white/30" />
+          <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] italic text-slate-800 dark:text-white">
             End-to-End AI Infrastructure
           </p>
-          <div className="h-[1px] w-12 bg-slate-300 dark:bg-white/20" />
+          <div className="h-[1px] w-8 sm:w-12 bg-slate-300 dark:bg-white/30" />
         </div>
-        <p className="text-[10px] font-bold text-slate-500 dark:text-white/60 uppercase tracking-widest mb-8">
+        <p className="text-[9px] sm:text-[10px] font-bold text-slate-700 dark:text-white/80 uppercase tracking-widest sm:tracking-[0.2em] mb-8 break-words max-w-full">
           Pollinations AI • RuangRiung • Cloudflare Pages • 2026
         </p>
-        <div className="inline-block bg-slate-100 dark:bg-white/5 py-2.5 px-6 rounded-full border border-slate-200 dark:border-white/10 shadow-sm">
-          <p className="text-[10px] font-bold text-slate-600 dark:text-white/80 uppercase tracking-[0.15em]">
+        <div className="inline-block bg-white dark:bg-white/10 py-3 px-4 sm:px-6 rounded-2xl sm:rounded-full border border-slate-300 dark:border-white/20 shadow-md max-w-full">
+          <p className="text-[10px] font-bold text-slate-800 dark:text-white/90 uppercase tracking-wide sm:tracking-[0.15em] leading-relaxed break-words">
             Menemukan bug atau hal yang tidak berfungsi? 
-            <a href="mailto:admin@ruangriung.my.id" className="ml-2 text-orange-600 dark:text-orange-400 hover:text-orange-500 transition-colors underline decoration-orange-500/30 hover:decoration-orange-500 underline-offset-4 font-black">
+            <a href="mailto:admin@ruangriung.my.id" className="inline-block ml-0 sm:ml-2 mt-1 sm:mt-0 text-orange-600 dark:text-orange-400 hover:text-orange-500 transition-colors underline decoration-orange-500/50 hover:decoration-orange-500 underline-offset-4 font-black">
               Laporkan ke Admin
             </a>
           </p>
