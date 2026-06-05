@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Share2, Facebook, Twitter, Link as LinkIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { parseMarkdown } from '../lib/markdown';
 import toast from 'react-hot-toast';
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function ArticleDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -144,7 +145,7 @@ export default function ArticleDetail() {
           {/* Main Content Rendered */}
           <div 
             className="prose-container mt-12 text-slate-600 dark:text-white/70"
-            dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.contentHtml) }}
           />
 
           {/* Tags Cloud */}

@@ -4,6 +4,23 @@ export async function onRequest(context: any) {
   const method = request.method;
 
   try {
+    const origin = request.headers.get('Origin');
+    const corsHeaders: Record<string, string> = {
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-pollinations-key',
+    };
+    
+    if (origin && (origin.includes('localhost') || origin.includes('ruangriung.my.id'))) {
+      corsHeaders['Access-Control-Allow-Origin'] = origin;
+    }
+
+    if (method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: corsHeaders,
+      });
+    }
+
     let prompt: string | null = null;
     let params: any = {};
 
@@ -88,7 +105,11 @@ export async function onRequest(context: any) {
     }
 
     const newHeaders = new Headers(response.headers);
-    newHeaders.set('Access-Control-Allow-Origin', '*');
+    
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+      newHeaders.set(key, value);
+    });
+    
     newHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
 
     return new Response(response.body, {

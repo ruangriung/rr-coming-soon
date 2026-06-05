@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Copy, User, Calendar, Terminal, Zap, ChevronLeft, ChevronRight, Share2, Twitter, Facebook, Link as LinkIcon } from 'lucide-react';
 import { parseMarkdown } from '../lib/markdown';
 import toast from 'react-hot-toast';
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function PromptDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -151,7 +152,7 @@ export default function PromptDetail() {
 
               <div 
                 className="prose-container bg-slate-50 dark:bg-white/[0.03] p-10 rounded-3xl border border-slate-100 dark:border-white/5 italic font-mono text-slate-700 dark:text-white/80"
-                dangerouslySetInnerHTML={{ __html: prompt.contentHtml }}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(prompt.contentHtml) }}
               />
 
               <div className="flex flex-wrap gap-2 mt-10">
