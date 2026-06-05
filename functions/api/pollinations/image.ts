@@ -56,13 +56,8 @@ export async function onRequest(context: any) {
     // Map frontend camelCase to API snake_case
     const payload: any = { prompt };
     
-    // Workaround for Pollinations POST endpoint ignoring the 'seed' parameter in JSON
-    // We append the seed (or a random number) directly to the prompt string to bypass caching
-    if (params.seed !== undefined && params.seed !== -1 && params.seed !== '-1') {
-      payload.prompt = `${prompt} --seed ${params.seed}`;
-    } else {
-      payload.prompt = `${prompt} --seed ${Math.floor(Math.random() * 10000000)}`;
-    }
+    // We use the prompt directly now since we pass params via GET query string
+    payload.prompt = prompt;
     
     if (params.negativePrompt || params.negative_prompt) {
       payload.negative_prompt = params.negative_prompt || params.negativePrompt;
@@ -81,9 +76,17 @@ export async function onRequest(context: any) {
       }
     });
 
+    const pollParams = new URLSearchParams();
+    Object.keys(payload).forEach(key => {
+      if (key !== 'prompt' && payload[key] !== undefined && payload[key] !== null) {
+        pollParams.set(key, payload[key].toString());
+      }
+    });
+
+    const targetUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(payload.prompt)}?${pollParams.toString()}`;
+
     const headers: Record<string, string> = {
-      'Accept': 'image/*, application/json',
-      'Content-Type': 'application/json',
+      'Accept': 'image/*',
       'Referer': 'https://ruangriung.my.id',
       'User-Agent': 'RuangRiung-Generator/1.0',
     };
@@ -92,10 +95,9 @@ export async function onRequest(context: any) {
       headers['Authorization'] = `Bearer ${activeApiKey}`;
     }
 
-    const response = await fetch('https://image.pollinations.ai/', {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload)
+    const response = await fetch(targetUrl, {
+      method: 'GET',
+      headers
     });
 
     if (!response.ok) {
