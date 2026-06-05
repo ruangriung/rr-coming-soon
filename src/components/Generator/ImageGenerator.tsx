@@ -268,6 +268,12 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
       const urls = await Promise.all(promises);
       setImageUrls(urls);
       
+      setTimeout(() => {
+        if (displayRef.current) {
+          displayRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      
       toast.success('Gambar berhasil dibuat!');
     } catch (err: any) {
       if (err.message !== 'Payment Required') {
@@ -344,11 +350,15 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
                         setSettings(prev => ({ 
                           ...prev, 
                           prompt: item.prompt || '', 
-                          model: item.metadata?.model || prev.model 
+                          negativePrompt: item.negativePrompt || '',
+                          model: item.model || 'flux',
+                          width: item.width || 1024,
+                          height: item.height || 1024,
+                          seed: item.seed || -1
                         }));
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="flex-1 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[9px] font-black text-white uppercase tracking-wider transition-all cursor-pointer"
+                      className="px-3 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-[10px] font-bold text-white transition-all cursor-pointer backdrop-blur-sm uppercase tracking-wider flex-1"
                     >
                       Reuse
                     </button>
