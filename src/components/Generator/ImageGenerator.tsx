@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ControlPanel from './ControlPanel.tsx';
 import ImageDisplay from './ImageDisplay.tsx';
 import ImageModal from './ImageModal.tsx';
@@ -44,6 +44,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [modelList, setModelList] = useState<{id: string; name: string; isPro: boolean}[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const displayRef = useRef<HTMLDivElement>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('pollinations_api_key'));
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [historyUrls, setHistoryUrls] = useState<Record<string, string>>({});
@@ -130,10 +131,11 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
       // Fallback to direct API if proxy fails
       if (!response.ok) {
         console.warn("Proxy API failed, falling back to direct Pollinations API");
+        const activeKey = localStorage.getItem('pollinations_api_key');
         response = await fetch('https://gen.pollinations.ai/models', {
-          headers: {
-            'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
-          }
+          headers: activeKey ? {
+            'Authorization': `Bearer ${activeKey}`
+          } : {}
         });
       }
 
@@ -185,13 +187,18 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
     }
 
     setIsLoading(true);
+    // Autoscroll to the image display container
+    if (displayRef.current) {
+      displayRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
     imageUrls.forEach(url => {
       if (url.startsWith('blob:')) URL.revokeObjectURL(url);
     });
     setImageUrls([]);
 
     try {
-      const { batchSize, seed, inputImages, ...rest } = settings;
+      const { batchSize, seed, inputImages, quality, ...rest } = settings as any;
       const currentSeed = seed === -1 ? Math.floor(Math.random() * 1000000) : seed;
       
       const promises = Array(batchSize).fill(0).map(async (_, i) => {
@@ -225,7 +232,7 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
           response = await fetch(directUrl, {
             headers: {
               'Accept': 'image/*',
-              'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+              ...(activeKey ? { 'Authorization': `Bearer ${activeKey}` } : {})
             }
           });
         }
@@ -267,19 +274,8 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
 
   return (
     <div className="w-full space-y-12 animate-in fade-in duration-700">
-      <div className="w-full flex flex-col lg:flex-row items-start justify-center gap-12 max-w-7xl mx-auto">
-        <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
-           <ImageDisplay isLoading={isLoading} imageUrls={imageUrls} />
-           {imageUrls.length > 0 && (
-             <button 
-               onClick={() => setSelectedImage(imageUrls[0])}
-               className="flex items-center gap-2 text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest hover:text-orange-500 transition-all cursor-pointer"
-             >
-               <Maximize2 size={14} /> Perbesar Hasil
-             </button>
-           )}
-        </div>
-        <div className="w-full lg:w-1/2">
+      <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12 max-w-7xl mx-auto">
+        <div className="w-full lg:w-[45%] flex-shrink-0">
             <ControlPanel 
               settings={settings} 
               setSettings={setSettings} 
@@ -290,6 +286,13 @@ export default function ImageGenerator({ onPaymentRequired }: { onPaymentRequire
               onCopyJson={handleCopyJson}
               models={modelList}
             />
+        </div>
+        <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center gap-6 sticky top-24 pt-4 lg:pt-0">
+           <ImageDisplay 
+             isLoading={isLoading} 
+             imageUrls={imageUrls} 
+             onZoom={(url) => setSelectedImage(url)} 
+           />
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Download, Maximize2 } from 'lucide-react';
+import { ZoomOut, Download } from 'lucide-react';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -28,7 +28,7 @@ export default function ImageModal({ isOpen, imageUrl, onClose }: ImageModalProp
           onClick={onClose}
           className="p-3 bg-white/10 dark:bg-white/10 hover:bg-red-500 text-white rounded-full transition-all border border-white/20 shadow-xl cursor-pointer"
         >
-          <X size={20} />
+          <ZoomOut size={20} />
         </button>
       </div>
 

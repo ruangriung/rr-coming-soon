@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Video, Sparkles, Download, Wand2, Plus, AlertCircle, RefreshCw, X, Lock, Key, ArrowRight, Zap, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -14,6 +14,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
     const [isEnhancing, setIsEnhancing] = useState(false);
     const [videoUrl, setVideoUrl] = useState<string | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('pollinations_api_key'));
+    const displayRef = useRef<HTMLDivElement>(null);
 
     const handleConnectBYOP = () => {
         const params = new URLSearchParams({
@@ -44,10 +45,11 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
             // Fallback to direct API if proxy fails (500 or 404)
             if (!response.ok) {
                 console.warn("Proxy API failed, falling back to direct Pollinations API");
+                const activeKey = localStorage.getItem('pollinations_api_key');
                 response = await fetch('https://gen.pollinations.ai/models', {
-                    headers: {
-                        'x-pollinations-key': localStorage.getItem('pollinations_api_key') || ''
-                    }
+                    headers: activeKey ? {
+                        'Authorization': `Bearer ${activeKey}`
+                    } : {}
                 });
             }
 
@@ -142,6 +144,10 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
         setIsLoading(true);
         setVideoUrl(null);
         
+        if (displayRef.current) {
+            displayRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
         try {
             const [wRatio, hRatio] = aspectRatio.split(':').map(Number);
             const width = wRatio > hRatio ? 1280 : 720;
@@ -182,7 +188,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                 response = await fetch(directUrl, {
                     headers: {
                         'Accept': 'video/*',
-                        'Authorization': activeKey ? `Bearer ${activeKey}` : ''
+                        ...(activeKey ? { 'Authorization': `Bearer ${activeKey}` } : {})
                     }
                 });
             }
@@ -301,9 +307,9 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-6">
+        <div className="w-full max-w-7xl mx-auto space-y-8 animate-in fade-in duration-700">
+            <div className="w-full flex flex-col-reverse lg:flex-row items-start justify-between gap-8 lg:gap-12">
+                <div className="w-full lg:w-[45%] flex-shrink-0 space-y-6">
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <label className="block text-[10px] font-black text-slate-400 dark:text-white/40 uppercase tracking-widest">Pilih Mesin Video</label>
@@ -470,7 +476,7 @@ export default function VideoGenerator({ onPaymentRequired }: { onPaymentRequire
                     </button>
                 </div>
 
-                <div className="flex flex-col items-center justify-center space-y-6">
+                <div ref={displayRef} className="w-full lg:w-[55%] flex flex-col items-center justify-center space-y-6 sticky top-24 pt-4 lg:pt-0">
                     <div className="w-full aspect-video rounded-3xl bg-slate-50 dark:bg-white/5 border-2 border-dashed border-slate-200 dark:border-white/10 flex items-center justify-center overflow-hidden relative group shadow-xl shadow-slate-200/50 dark:shadow-none">
                         {videoUrl ? (
                             <video src={videoUrl} controls autoPlay loop className="w-full h-full object-contain" />

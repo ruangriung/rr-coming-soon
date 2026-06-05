@@ -16,8 +16,8 @@ export default function BYOPHandler({ onKeyChange }: { onKeyChange?: () => void 
         window.dispatchEvent(new Event('storage'));
         setApiKey(key);
         if (onKeyChange) onKeyChange();
-        // Clean hash from URL
-        window.history.replaceState(null, '', window.location.pathname);
+        // Clean hash from URL without removing query parameters
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
         toast.success('Terhubung ke Pollinations Pro!');
       }
     } else {
