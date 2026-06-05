@@ -47,7 +47,6 @@ export async function onRequest(context: any) {
                       request.headers.get('Authorization')?.replace('Bearer ', '');
     const activeApiKey = clientKey || POLLINATIONS_API_KEY;
 
-    const pollParams = new URLSearchParams();
     const supportedParams = [
       'model', 'width', 'height', 'seed', 'enhance', 'nologo', 'private',
       'negative_prompt', 'safe', 'quality', 'transparent',
@@ -55,33 +54,28 @@ export async function onRequest(context: any) {
     ];
 
     // Map frontend camelCase to API snake_case
-    if (params.negativePrompt && !params.negative_prompt) {
-      params.negative_prompt = params.negativePrompt;
+    const payload: any = { prompt };
+    
+    if (params.negativePrompt || params.negative_prompt) {
+      payload.negative_prompt = params.negative_prompt || params.negativePrompt;
     }
-    if (params.imageQuality && !params.quality) {
-      params.quality = params.imageQuality;
+    if (params.imageQuality || params.quality) {
+      payload.quality = params.quality || params.imageQuality;
     }
 
     Object.keys(params).forEach(key => {
       if (supportedParams.includes(key) && params[key] !== 'undefined' && params[key] !== null) {
         if (key === 'model') {
-          pollParams.set(key, params[key].toString().toLowerCase());
-        } else if (Array.isArray(params[key])) {
-          params[key].forEach((item: any) => pollParams.append(key, item.toString()));
+          payload[key] = params[key].toString().toLowerCase();
         } else {
-          pollParams.set(key, params[key].toString());
+          payload[key] = params[key];
         }
       }
     });
 
-    if (activeApiKey) {
-      pollParams.set('key', activeApiKey);
-    }
-
-    const baseUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}`;
-    
     const headers: Record<string, string> = {
       'Accept': 'image/*, application/json',
+      'Content-Type': 'application/json',
       'Referer': 'https://ruangriung.my.id',
       'User-Agent': 'RuangRiung-Generator/1.0',
     };
@@ -90,10 +84,10 @@ export async function onRequest(context: any) {
       headers['Authorization'] = `Bearer ${activeApiKey}`;
     }
 
-    const apiUrl = `${baseUrl}?${pollParams.toString()}`;
-    const response = await fetch(apiUrl, {
-      method: 'GET',
+    const response = await fetch('https://image.pollinations.ai/', {
+      method: 'POST',
       headers,
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
