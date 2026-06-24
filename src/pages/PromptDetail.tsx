@@ -20,7 +20,7 @@ export default function PromptDetail() {
     setIsLoading(true);
     setError(null);
 
-    // Fetch related prompts
+    // Fetch prompts index
     fetch('/prompts-index.json')
       .then(res => res.json())
       .then(data => {
@@ -31,24 +31,22 @@ export default function PromptDetail() {
               .filter((p: any) => (p.tool === current.tool || p.tags?.some((t: string) => current.tags?.includes(t))) && p.slug !== slug)
               .slice(0, 3);
             setRelatedPrompts(related);
+
+            // Generate HTML from the raw content already present in the JSON index
+            const htmlData = parseMarkdown(current.content || '', slug);
+            setPrompt({
+              ...current,
+              contentHtml: htmlData.contentHtml
+            });
+            setIsLoading(false);
+          } else {
+            throw new Error('Prompt tidak ditemukan');
           }
         }
       })
-      .catch(err => console.warn('Related prompts error:', err));
-    
-    fetch(`/content/prompts/${slug}.md`)
-      .then(res => {
-        if (!res.ok) throw new Error('Prompt tidak ditemukan');
-        return res.text();
-      })
-      .then(md => {
-        const parsed = parseMarkdown(md, slug);
-        setPrompt(parsed);
-        setIsLoading(false);
-      })
       .catch(err => {
         console.error('Prompt load error:', err);
-        setError(err.message);
+        setError(err.message || 'Prompt tidak ditemukan');
         setIsLoading(false);
         setTimeout(() => navigate('/kumpulan-prompt'), 3000);
       });

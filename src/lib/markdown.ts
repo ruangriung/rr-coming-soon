@@ -59,6 +59,7 @@ export function parseMarkdown(md: string, slug: string): any {
   if (!match) {
     return { 
       slug, 
+      content: md.trim(),
       contentHtml: simpleMarkdownToHtml(md.trim()) 
     };
   }
@@ -67,6 +68,7 @@ export function parseMarkdown(md: string, slug: string): any {
   const rawContent = match[2].trim();
   const metadata: any = { 
     slug, 
+    content: rawContent,
     contentHtml: simpleMarkdownToHtml(rawContent) 
   };
 

@@ -17,6 +17,7 @@ function parseFrontmatter(md) {
   if (!match) return { data: {}, content: md };
 
   const yaml = match[1];
+  const markdownContent = match[2].trim();
   const data = {};
   
   yaml.split('\n').forEach(line => {
@@ -36,7 +37,7 @@ function parseFrontmatter(md) {
       }
     }
   });
-  return { data };
+  return { data, content: markdownContent };
 }
 
 function generateIndex() {
@@ -48,8 +49,8 @@ function generateIndex() {
     const files = fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.md'));
     allArticles = files.map(file => {
       const slug = file.replace(/\.md$/, '');
-      const content = fs.readFileSync(path.join(ARTICLES_DIR, file), 'utf8');
-      const { data } = parseFrontmatter(content);
+      const fileContent = fs.readFileSync(path.join(ARTICLES_DIR, file), 'utf8');
+      const { data } = parseFrontmatter(fileContent);
       return { slug, ...data };
     }).sort((a, b) => new Date(b.date) - new Date(a.date));
     
@@ -62,9 +63,9 @@ function generateIndex() {
     const files = fs.readdirSync(PROMPTS_DIR).filter(f => f.endsWith('.md'));
     allPrompts = files.map(file => {
       const slug = file.replace(/\.md$/, '');
-      const content = fs.readFileSync(path.join(PROMPTS_DIR, file), 'utf8');
-      const { data } = parseFrontmatter(content);
-      return { slug, ...data };
+      const fileContent = fs.readFileSync(path.join(PROMPTS_DIR, file), 'utf8');
+      const { data, content } = parseFrontmatter(fileContent);
+      return { slug, content, ...data };
     }).sort((a, b) => new Date(b.date) - new Date(a.date));
     
     fs.writeFileSync(OUTPUT_PROMPTS, JSON.stringify(allPrompts, null, 2));
