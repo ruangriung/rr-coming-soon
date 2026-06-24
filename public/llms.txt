@@ -1,0 +1,37 @@
+# RuangRiung AI Tools
+
+This is the central hub for AI tools provided by RuangRiung. The platform offers a variety of AI-powered utilities designed to enhance creativity, productivity, and education.
+
+## Available Tools
+
+1. **AI Image Studio** (`/generator?tab=image`)
+   - High-precision image generator with support for the latest models for maximum resolution.
+
+2. **AI Video Creator** (`/generator?tab=video`)
+   - Convert text narratives and static images into cinematic video sequences with fast rendering.
+
+3. **AI BG Remover** (`/generator?tab=removebg`)
+   - Instantly remove photo backgrounds using AI technology directly in the browser.
+
+4. **AI Audio Gen** (`/generator?tab=audio`)
+   - Generate unique music and sound effects based on text descriptions for creative projects.
+
+5. **AI Image Analysis** (`/generator?tab=analysis`)
+   - Get in-depth descriptions and technical analysis of any image with the help of AI vision.
+
+6. **AI Assistant** (`/generator?tab=chat`)
+   - An intelligent chat assistant to help brainstorm ideas, code, and write content.
+
+7. **QR Generator** (`/qr-generator`)
+   - Create QR Codes with logo customization and dot styles for your branding needs.
+
+8. **Prompt Library** (`/kumpulan-prompt`)
+   - A curated repository containing specific instruction prompts for optimal AI results.
+
+9. **Pemuryadi Generator** (`https://digen.id`)
+   - An educational AI platform in collaboration with Pemuryadi & RuangRiung. Specifically designed to help teachers instantly compile Teaching Modules (Modul Ajar), Lesson Plans (RPP Kurikulum Merdeka), school administration, and various other educational modules.
+
+## Technical Details
+- Built with React, TypeScript, Vite, and TailwindCSS.
+- Uses Pollinations AI for image generation.
+- Features a markdown-based Prompt Library that is statically generated into a JSON index for fast client-side rendering.
