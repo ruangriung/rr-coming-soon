@@ -229,7 +229,7 @@ export default function LandingPage() {
                 <div>
                   <h4 className="text-xl font-bold mb-2 text-white">Pemuryadi Generator</h4>
                   <p className="text-sm text-white/80 font-medium leading-relaxed max-w-2xl">
-                    Platform AI pendidikan dari RuangRiung yang dirancang khusus untuk membantu guru membuat Modul Ajar, RPP (Kurikulum Merdeka), dan administrasi sekolah secara instan.
+                    Platform AI pendidikan kolaborasi Pemuryadi & RuangRiung yang dirancang khusus untuk membantu guru menyusun Modul Ajar, RPP (Kurikulum Merdeka), administrasi sekolah secara instan, beserta beragam modul pendidikan lainnya.
                   </p>
                 </div>
               </div>
