@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Video, Image as ImageIcon, BookOpen, Key, ArrowRight, QrCode, Scissors, Volume2, Brain, MessageSquare } from 'lucide-react';
+import { Sparkles, Video, Image as ImageIcon, BookOpen, Key, ArrowRight, QrCode, Scissors, Volume2, Brain, MessageSquare, ExternalLink } from 'lucide-react';
 
 export default function LandingPage() {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -220,6 +220,24 @@ export default function LandingPage() {
                 <ArrowRight size={14} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </div>
             </Link>
+
+            <a href="https://digen.id" target="_blank" rel="noopener noreferrer" className="group p-8 bg-orange-500 hover:bg-orange-600 border border-orange-400 rounded-2xl transition-all flex flex-col md:flex-row items-start md:items-center justify-between h-full md:col-span-2 lg:col-span-4 shadow-xl shadow-orange-500/20">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center text-white mb-4 md:mb-0 shrink-0">
+                  <Sparkles size={24} strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold mb-2 text-white">Pemuryadi Generator</h4>
+                  <p className="text-sm text-white/80 font-medium leading-relaxed max-w-2xl">
+                    Generator pemuryadi berbasis AI untuk berbagai kebutuhan unik dan spesifik Anda. Coba sekarang di digen.id
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center text-sm font-bold text-white mt-6 md:mt-0 px-6 py-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors shrink-0">
+                <span>Akses Eksternal</span>
+                <ExternalLink size={16} className="ml-2" />
+              </div>
+            </a>
           </div>
         </section>
 
