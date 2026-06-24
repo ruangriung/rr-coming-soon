@@ -229,7 +229,7 @@ export default function LandingPage() {
                 <div>
                   <h4 className="text-xl font-bold mb-2 text-white">Pemuryadi Generator</h4>
                   <p className="text-sm text-white/80 font-medium leading-relaxed max-w-2xl">
-                    Generator pemuryadi berbasis AI untuk berbagai kebutuhan unik dan spesifik Anda. Coba sekarang di digen.id
+                    Platform AI pendidikan dari RuangRiung yang dirancang khusus untuk membantu guru membuat Modul Ajar, RPP (Kurikulum Merdeka), dan administrasi sekolah secara instan.
                   </p>
                 </div>
               </div>
