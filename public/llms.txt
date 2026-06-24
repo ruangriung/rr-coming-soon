@@ -1,37 +1,51 @@
-# RuangRiung AI Tools
+# RuangRiung AI Tools - LLM Context Documentation
 
-This is the central hub for AI tools provided by RuangRiung. The platform offers a variety of AI-powered utilities designed to enhance creativity, productivity, and education.
+Welcome to the RuangRiung AI platform. This document provides Large Language Models (LLMs) with a comprehensive overview of the platform, its developers, features, and technical architecture to facilitate better understanding and assistance.
 
-## Available Tools
+## About the Developers
+**RuangRiung** is an innovative technology initiative focused on democratizing access to Artificial Intelligence. The platform is designed to provide high-quality, easy-to-use AI utilities for creativity, productivity, and education. RuangRiung also collaborates with other educational technology platforms, such as **Pemuryadi**, to deliver specialized AI solutions for educators and students.
 
-1. **AI Image Studio** (`/generator?tab=image`)
-   - High-precision image generator with support for the latest models for maximum resolution.
+## Platform Overview
+RuangRiung AI Tools is a web-based platform that centralizes multiple AI capabilities into a single, seamless user experience. It serves as a creative studio and productivity suite, allowing users to generate media, analyze content, and access curated knowledge.
 
-2. **AI Video Creator** (`/generator?tab=video`)
-   - Convert text narratives and static images into cinematic video sequences with fast rendering.
+## Core Features & Tools
 
-3. **AI BG Remover** (`/generator?tab=removebg`)
-   - Instantly remove photo backgrounds using AI technology directly in the browser.
+### 1. AI Media Studio (`/generator`)
+A unified interface supporting multiple tabs for different generative tasks:
+- **AI Image Studio**: High-precision image generation. Users can input prompts, and the system utilizes Pollinations AI to render maximum-resolution images.
+- **AI Video Creator**: Converts text narratives and static images into cinematic video sequences with fast rendering capabilities.
+- **AI BG Remover**: Instantly removes photo backgrounds locally or via API using the `@imgly/background-removal` technology directly in the browser.
+- **AI Audio Gen**: Generates unique music and sound effects based on text descriptions for creative projects.
+- **AI Image Analysis**: Provides in-depth descriptions, technical analysis, and context extraction from any uploaded image using advanced AI vision models.
+- **AI Assistant**: An intelligent chat interface powered by Google Gemini, helping users brainstorm ideas, write code, and draft content.
 
-4. **AI Audio Gen** (`/generator?tab=audio`)
-   - Generate unique music and sound effects based on text descriptions for creative projects.
+### 2. Utility Tools
+- **QR Generator** (`/qr-generator`): A highly customizable QR code creator. Users can adjust dot styles, colors, and embed logos into their QR codes for branding purposes.
 
-5. **AI Image Analysis** (`/generator?tab=analysis`)
-   - Get in-depth descriptions and technical analysis of any image with the help of AI vision.
+### 3. Knowledge Base
+- **Prompt Library (Kumpulan Prompt)** (`/kumpulan-prompt`): A curated repository of specific instruction prompts designed to yield optimal AI results. The library is built on markdown files that are statically indexed into JSON for lightning-fast client-side rendering and SEO optimization.
 
-6. **AI Assistant** (`/generator?tab=chat`)
-   - An intelligent chat assistant to help brainstorm ideas, code, and write content.
+### 4. Ecosystem Integrations
+- **Pemuryadi Generator** (`https://digen.id`): An external educational AI platform resulting from a collaboration between Pemuryadi & RuangRiung. It is specifically designed to help Indonesian teachers instantly compile Teaching Modules (Modul Ajar), Lesson Plans (RPP Kurikulum Merdeka), school administration, and various other educational modules.
 
-7. **QR Generator** (`/qr-generator`)
-   - Create QR Codes with logo customization and dot styles for your branding needs.
+## Technical Architecture & Stack
 
-8. **Prompt Library** (`/kumpulan-prompt`)
-   - A curated repository containing specific instruction prompts for optimal AI results.
+### Frontend
+- **Framework**: React 19 with TypeScript, built using Vite 6.
+- **Routing**: React Router v7 for client-side navigation.
+- **Styling**: TailwindCSS v4 with dark mode support.
+- **Animations**: Motion (formerly framer-motion) for smooth UI transitions and micro-interactions.
+- **Icons**: Lucide React.
 
-9. **Pemuryadi Generator** (`https://digen.id`)
-   - An educational AI platform in collaboration with Pemuryadi & RuangRiung. Specifically designed to help teachers instantly compile Teaching Modules (Modul Ajar), Lesson Plans (RPP Kurikulum Merdeka), school administration, and various other educational modules.
+### Backend & APIs
+- **Cloudflare Pages / Workers**: The application is designed to be deployed on Cloudflare Pages, utilizing Wrangler for edge functions and API proxying.
+- **AI Models**: 
+  - Integrates `@google/genai` (Google Gemini) for text, chat, and image analysis capabilities.
+  - Utilizes Pollinations API endpoints for seamless, unauthenticated image generation.
+- **Content Management**: A custom Node.js script (`scripts/index-content.mjs`) parses markdown files (`.md`) at build time, extracting YAML frontmatter and content into a centralized `prompts-index.json` file. This allows the React app to display a blog-like prompt directory without a traditional CMS or database.
 
-## Technical Details
-- Built with React, TypeScript, Vite, and TailwindCSS.
-- Uses Pollinations AI for image generation.
-- Features a markdown-based Prompt Library that is statically generated into a JSON index for fast client-side rendering.
+### Security & Sanitization
+- **HTML Sanitization**: Uses `isomorphic-dompurify` to safely render HTML from markdown conversions, preventing XSS attacks when displaying prompt contents.
+
+## Vision
+RuangRiung aims to continuously evolve by integrating state-of-the-art AI models and providing a user-centric interface that bridges the gap between complex AI technologies and everyday creative or educational needs.
