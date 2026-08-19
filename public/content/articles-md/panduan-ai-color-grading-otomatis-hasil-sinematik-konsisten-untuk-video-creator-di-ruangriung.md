@@ -1,6 +1,6 @@
 ---
 title: "Panduan AI Color Grading Otomatis: Hasil Sinematik Konsisten untuk Video Creator di RuangRiung"
-date: "2026-08-16T05:30:56.661Z"
+date: "2026-08-19T05:32:59.690Z"
 author: "RuangRiung AI"
 summary: "Pelajari cara AI color grading otomatis yang konsisten, mulai dari workflow, preset mood, hingga QC warna agar video terlihat sinematik namun natural."
 image: "/assets/ruangriung.png"
